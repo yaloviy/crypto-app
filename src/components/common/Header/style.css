@@ -1,0 +1,16 @@
+header {
+    max-height: 100px;
+    height: 100%;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    background-color: grey;
+}
+
+.header__list {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    width: 100%;
+}
