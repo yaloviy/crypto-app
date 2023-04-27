@@ -1,7 +1,6 @@
 import React from 'react';
-import Header from '../../../common/Header/Header';
 import { TextField, Button, Typography } from '@mui/material'
-import { IPropsRegister } from '../../../common/types/auth/auth';
+import { IPropsRegister } from '../../../../common/types/auth/auth';
 
 const Register: React.FC<IPropsRegister> = (props:IPropsRegister): JSX.Element => {
     const {firstName, username, email, password, repeatPassword, navigate } = props

@@ -26,10 +26,11 @@ const links = [
 ]
 
 export const Header = () => {
+    const navigate = useNavigate();
     return (
         <header>
             <ul className='header__list'>
-                {links.map((link, index) => (<li key={index} className='header__item'><span >{link.title}</span></li>))}
+                {links.map((link, index) => (<li  key={index} onClick={() => navigate(`${link.to}`)} className='header__item'>{link.title}</li>))}
             </ul>
         </header>
     );

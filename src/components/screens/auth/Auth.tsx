@@ -10,7 +10,7 @@ import { login } from '../../../components/store/slice/auth'
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
 import { useSelector } from 'react-redux';
 import { finished } from 'stream/promises';
-import { AppErrors } from '../../common/errors';
+import { AppErrors } from '../../../common/errors';
 
 
 const Auth = () => {
@@ -33,7 +33,7 @@ const Auth = () => {
 
     const handleSubmit = async (e: { preventDefault: () => void}) => {
         e.preventDefault()
-        if (location.pathname == '/login') {
+        if (location.pathname === '/login') {
         try {
             const userData = {
                 email,
@@ -49,17 +49,21 @@ const Auth = () => {
             
         }
 
-        } else if (location.pathname == '/register') {
-            const userData = {
-                firstName,
-                username,
-                email,
-                password,
+        } else if (location.pathname === '/register') {
+            try {
+                const userData = {
+                    firstName,
+                    username,
+                    email,
+                    password,
+                }
+                registerValidation(userData)
+                const createUser = await axiosinstance.post('/auth/register', userData)
+                await dispatch(login(createUser.data))
+                navigate('/')
+            } catch (error) {
+                console.log(AppErrors.SomethingWentWrong)
             }
-            registerValidation(userData)
-            const createUser = await axiosinstance.post('/auth/register', userData)
-            await console.log(createUser.data)
-            
         }
     }
     return (
@@ -94,4 +98,4 @@ const Auth = () => {
     );
 };
 
-export default Auth;
+export default Auth; 

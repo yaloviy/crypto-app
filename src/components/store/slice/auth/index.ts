@@ -1,8 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { IAuthState } from '../../../common/types/auth/auth'
 
 
-const initialState: IAuthState = {
+export interface IAuthState {
+    userinfo: object | IPublicUser,
+    isLogin: boolean,
+    token: string
+}
+
+export interface IPublicUser {
+    id: null | number,
+    firstName: string | object,
+    username: string,
+    email:string,
+    createdAt: string,
+    updatedAt: string,
+    watchList: [IWatchList]
+}
+
+
+export interface IWatchList {
+    id: null | number,
+    name: string,
+    assetId: string,
+    createdAt: string,
+    updatedAt: string,
+    user: null | number,
+}
+
+
+const initialState: any = {
     userinfo: {
         id: null,
         firstName: '',
@@ -19,6 +45,7 @@ const initialState: IAuthState = {
             user: null,
         }]
     },
+    token: '',
     isLogin: false
 }
 
@@ -28,10 +55,10 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         login(state, action) {
-            state.userinfo = action.payload
+            state.userinfo = action.payload.user
             state.isLogin = true
-            console.log(state.isLogin)
-            console.log(state.userinfo)
+            state.token = action.payload.token
+            
         },
         register() {
             

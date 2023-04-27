@@ -14,3 +14,9 @@ header {
     justify-content: space-around;
     width: 100%;
 }
+
+
+.header__list li {
+    cursor: pointer;
+    
+}

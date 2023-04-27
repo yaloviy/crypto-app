@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import Header from '../../../common/Header/Header';
+import Header from '../../../../common/Header/Header';
 import { TextField, Button, Typography } from '@mui/material'
 import styles from './style.module.css'
 import { margin } from '@mui/system';
-import { IPropsLogin } from '../../../common/types/auth/auth';
+import { IPropsLogin } from '../../../../common/types/auth/auth';
 import { jsx } from '@emotion/react';
 
 
