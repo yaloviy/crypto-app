@@ -10,17 +10,25 @@ export const useStyles = makeStyles((theme:Theme) => {
         {
             root: {
                 backgroundColor: `${colors.primary.DEFAULT} !important`,
-                width: '250px', 
                 
             },
             drawer: {
                 '&. MuiDrawer-paper': {
                     boxSizing: 'border-box',
                     height: '100%',
-                    backgroundColor: `${colors.primary.DEFAULT} !important`,
+                    background: `${colors.primary.DEFAULT} !important`,
+                },
+                '&. MuiDrawer-root': {
+                    background: `${colors.primary.DEFAULT} !important`
+                },
+                '& .MuiDrawer-docked': {
+                    background: `${colors.primary.DEFAULT} !important`
+                },
+                '& .MuiDrawer-modal': {
+                    background: `${colors.primary.DEFAULT} !important`
                 },
                 height: '100%',
-                backgroundColor: `${colors.primary.DEFAULT} !important`,
+                background: `${colors.primary.DEFAULT} !important`,
             },
             brand: {
                 display: 'flex' ,

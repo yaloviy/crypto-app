@@ -8,12 +8,25 @@ export const useStyles = makeStyles((theme: Theme) => {
     return (
         {
             root: {
-                display: 'flex',
-                justifyContent: 'space-between',
                 padding:'32px 22px',
+                background: `${colors.primary.DEFAULT} !important`,
+                borderBottom: `1px solid ${colors.borderColor}`,
+                position: 'static',
+                boxShadow: 'none !important',
+
+            },
+            toolbar: {
+                justifyContent: 'space-between',
+                width: '100%',
                 alignItems: 'center',
-                backgroundColor: `${colors.primary.DEFAULT}`,
-                borderBottom: `1px solid ${colors.borderColor}`
+            },
+            greetings: {
+                display: 'flex',
+                alignItems: 'center',
+            },
+            menuIcon: {
+                marginRight: '20px',
+                cursor: 'pointer',
             },
             searchIcon: {
                 padding: '12px 12px',

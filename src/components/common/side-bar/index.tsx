@@ -5,7 +5,7 @@ import { useMediaQuery } from '@mui/material'
 
 import { Box, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, useTheme, IconButton } from '@mui/material'
 
-import {Home, ChevronLeft, ChevronRight, Timeline, Settings, MeetingRoom, ImportContacts, Apps, FormatColorTextSharp } from '@mui/icons-material';
+import {Home, ChevronLeft, ChevronRight, Timeline, Settings, MeetingRoom, ImportContacts, Apps, FormatColorTextSharp, Menu} from '@mui/icons-material';
 import Logo from '../../../assets/images/logo.svg'
 
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -27,22 +27,27 @@ const SideBar = ({isNonMobile, isOpen, setIsOpen, drawerWidth}:any) => {
     }, [active])
     return (<Box className={classes.root}>
     
-            {!isOpen && (
-                <IconButton>
-                    <ChevronRight /> 
-                </IconButton>
-            )}
+            
             {isOpen && (
                     <Drawer 
                     open={isOpen}
                     onClose={() => setIsOpen(false)}
                     variant='persistent'
                     anchor='left'
+                    
                     className={classes.drawer}
                     sx={{
                         width: drawerWidth,
-                        backgroundColor: `${colors.primary.DEFAULT}`
+                        '& .MuiDrawer-paper': {
+                            background: theme.palette.primary.main,
+                            boxSizing: 'border-box',
+                            width: drawerWidth,
+                            transition: '1s'
+                        },
+                        background: `${colors.primary.DEFAULT}`,
+                        transition: '1s'
                     }}
+                    
                 >
                     <Box className={classes.topBox} > 
                         <Box width='100%'>

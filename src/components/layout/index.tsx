@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { ILayout } from '../../common/types/layout/index'
 import TopBarComponent from '../common/top-bar';
 import { useMediaQuery } from '@mui/material'
@@ -10,7 +10,7 @@ import {useState} from 'react'
 import { useStyles } from '../layout/styles';
 
 
-const LayoutComponent = ({children}: ILayout): JSX.Element => {
+const LayoutComponent = (): JSX.Element => {
 
     const location  = useLocation()
     const isNonMobile = useMediaQuery('(min-width:600px)')
@@ -24,16 +24,16 @@ const LayoutComponent = ({children}: ILayout): JSX.Element => {
         ? 
         (
         <>
-            {children}
+            <Outlet />
         </>
         ) 
         :
         (
             <Box display={isNonMobile === true ? 'flex' : 'block'} width='100%' height='100%'>
-                <SideBar isNonMobile={isNonMobile} drawerWidth='250' isOpen={isOpen} setIsOpen={setIsOpen} />
+                <SideBar isNonMobile={isNonMobile} drawerWidth='250px' isOpen={isOpen} setIsOpen={setIsOpen} />
                 <Box className={classes.mainSection}>
-                    <TopBarComponent /> 
-                    {children}
+                    <TopBarComponent  isOpen={isOpen} setIsOpen={setIsOpen}/> 
+                    <Outlet />
                 </Box>
             </Box>
         )
