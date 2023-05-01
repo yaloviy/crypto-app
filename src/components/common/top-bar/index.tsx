@@ -13,9 +13,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { useStyles } from './style';
+import { ITopBarProps } from '../../../common/types/topbar';
 
 
-const TopBarComponent = ({isOpen, setIsOpen}:any) => {
+const TopBarComponent: React.FC<ITopBarProps> = ({isOpen, setIsOpen}:ITopBarProps):JSX.Element => {
     const user = useAppSelector(state => state.auth)
     const theme =  useTheme()
     const colors = tokens(theme.palette.mode)
@@ -25,7 +26,7 @@ const TopBarComponent = ({isOpen, setIsOpen}:any) => {
         <AppBar className={classes.root} position='static'>
             <Toolbar className={classes.toolbar} >
             <Grid className={classes.greetings}>
-                <IconButton className={classes.menuIcon} onClick={() => setIsOpen((prev:boolean) => !prev)}>
+                <IconButton className={classes.menuIcon} onClick={() => setIsOpen(!isOpen)}>
                     <MenuIcon /> 
                 </IconButton>
                 Welcome, {user.isLogin && (user.userinfo.firstName)}

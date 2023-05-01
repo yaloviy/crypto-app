@@ -46,6 +46,14 @@ export const useStyles = makeStyles((theme:Theme) => {
                     }
                 }
             },
+            active: {
+                backgroundColor: '#1900D5 !important',
+                borderRadius: '4px', 
+                color: `${colors.white.DEFAULT}`,
+                '& .MuiSvgIcon-root': {
+                    color: 'white !important'
+                }
+            },
             topBox: {
                 paddingBottom: '31px',
                 borderBottom: `1px solid ${colors.borderColor}`
