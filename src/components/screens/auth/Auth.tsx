@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Login from './Login/Login';
 import Register from './Register/Register';
-import './style.scss'
+  
 import { Box } from '@mui/material'
 import { axiosinstance } from '../../../utils/router/axios';
 import axios from 'axios';
@@ -12,8 +12,10 @@ import { useSelector } from 'react-redux';
 import { finished } from 'stream/promises';
 import { AppErrors } from '../../../common/errors';
 
+import { useStyles } from './styles'
 
 const Auth = () => {
+    const classes = useStyles()
     const location = useLocation()
     const [firstName, setFirstName] = useState('')
     const [username, setUsername] = useState('')
@@ -23,8 +25,7 @@ const Auth = () => {
     const dispatch = useAppDispatch()
     const useSelector = useAppSelector
     const navigate = useNavigate()
-
-
+    
 
     const registerValidation = (value:object) => {
         
@@ -68,7 +69,7 @@ const Auth = () => {
     }
     return (
         <div className='wrapper'>
-            <form className='auth-form' onSubmit={handleSubmit}>
+            <form className={classes.root} onSubmit={handleSubmit}>
                 <Box
                     display='flex'
                     justifyContent='center'
