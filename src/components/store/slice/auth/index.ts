@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { loginUser } from '../../thrunks/auth'
 
 export interface IAuthState {
     userinfo: object | IPublicUser,
@@ -29,7 +30,7 @@ export interface IWatchList {
 
 
 const initialState: any = {
-    userinfo: {
+    user: {
         id: null,
         firstName: '',
         username: '',
@@ -55,14 +56,18 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         login(state, action) {
-            state.userinfo = action.payload.user
+            state.user = action.payload.user
             state.isLogin = true
             state.token = action.payload.token
             
         },
-        register() {
-            
-        }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(loginUser.fulfilled, (state, action) => {
+            state.user = action.payload.user
+            state.isLogin = true
+            state.token = action.payload.token
+        })
     }
 })
 

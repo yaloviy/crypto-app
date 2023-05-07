@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Login from './Login/Login';
 import Register from './Register/Register';
   
-import { Box } from '@mui/material'
+import { Box, fabClasses } from '@mui/material'
 import { axiosinstance } from '../../../utils/router/axios';
 import axios from 'axios';
 import { login } from '../../../components/store/slice/auth'
@@ -12,7 +15,17 @@ import { useSelector } from 'react-redux';
 import { finished } from 'stream/promises';
 import { AppErrors } from '../../../common/errors';
 
-import { useStyles } from './styles'
+import { useStyles } from './styles';
+import { userDataLogin, userDataRegister } from '../../../common/types/auth/auth';
+
+
+
+import { DataArray } from '@mui/icons-material';
+
+
+
+import { LoginSchema } from '../../../utils/yup';
+
 
 const Auth = () => {
     const classes = useStyles()
@@ -21,34 +34,46 @@ const Auth = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [wrongFirstName, setWrongFirstName] = useState('')
+    const [wrongUsername, setWrongUsername] = useState('')
+    const [wrongEmail, setWrongEmail] = useState('')
+    const [wrongPassword, setWrongPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
+    const [validationRepeatPassword, setValidationRepeatPassword] = useState('')
+    
     const dispatch = useAppDispatch()
     const useSelector = useAppSelector
     const navigate = useNavigate()
-    
-
-    const registerValidation = (value:object) => {
-        
-    }
 
 
-    const handleSubmit = async (e: { preventDefault: () => void}) => {
-        e.preventDefault()
+    const {
+        register, 
+        formState: {
+            errors
+        },
+        handleSubmit
+    } = useForm({
+        mode: 'onBlur',
+        resolver: yupResolver(LoginSchema)
+    })
+
+    console.log('errors', errors)
+    const handleSubmitForm = async (data: any) => {
+        console.log('data', data)
         if (location.pathname === '/login') {
         try {
             const userData = {
-                email,
-                password
+                email: data.email,
+                password: data.password
             }
             const user = await axiosinstance.post('/auth/login', userData)
-            await dispatch(login(user.data))
-            navigate('/')
+                await dispatch(login(user.data))
+                navigate('/')
+            }
 
-        } catch (error) {
-            console.log(AppErrors.SomethingWentWrong)
-        } finally {
-            
-        }
+         catch (error) {
+            console.log(error)
+        } 
 
         } else if (location.pathname === '/register') {
             try {
@@ -58,18 +83,18 @@ const Auth = () => {
                     email,
                     password,
                 }
-                registerValidation(userData)
                 const createUser = await axiosinstance.post('/auth/register', userData)
                 await dispatch(login(createUser.data))
                 navigate('/')
+                
             } catch (error) {
-                console.log(AppErrors.SomethingWentWrong)
+                console.log(error)
             }
         }
     }
     return (
         <div className='wrapper'>
-            <form className={classes.root} onSubmit={handleSubmit}>
+            <form className={classes.root} onSubmit={handleSubmit(handleSubmitForm)}>
                 <Box
                     display='flex'
                     justifyContent='center'
@@ -82,16 +107,26 @@ const Auth = () => {
                     width='100%'
                 >
                     {location.pathname === '/login' ? <Login  
-                        email={setEmail} 
-                        password={setPassword} 
-                        navigate={navigate} /> 
+                        errors={errors}
+                        register={register}
+                        navigate={navigate}
+                        
+                         /> 
+                        
                     : location.pathname === '/register' ? <Register 
                         firstName={setFirstName} 
                         username={setUsername}
                         email={setEmail}
                         password={setPassword}
-                        repeatPassword={setRepeatPassword} 
-                        navigate={navigate}/> 
+                        repeatPassword={repeatPassword} 
+                        navigate={navigate}
+                        wrongFirstName={wrongFirstName}
+                        wrongUsername={wrongUsername}
+                        wrongEmail={wrongEmail}
+                        wrongPassword={wrongPassword}
+                        setRepeatPassword={setRepeatPassword}
+                        validationRepeatPassword={validationRepeatPassword}
+                        /> 
                     : null}
                 </Box>
             </form>

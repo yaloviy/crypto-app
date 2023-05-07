@@ -29,7 +29,7 @@ const TopBarComponent: React.FC<ITopBarProps> = ({isOpen, setIsOpen}:ITopBarProp
                 <IconButton className={classes.menuIcon} onClick={() => setIsOpen(!isOpen)}>
                     <MenuIcon /> 
                 </IconButton>
-                Welcome, {user.isLogin && (user.userinfo.firstName)}
+                Welcome, {user.isLogin && (user.user.firstName)}
             </Grid>
                 <Box display='flex' alignItems='center'>
                     <Grid sx={{pr: '37px', borderRight: `1px solid ${colors.mineShaft.DEFAULT}`}}>

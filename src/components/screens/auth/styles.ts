@@ -17,6 +17,10 @@ export const useStyles = makeStyles(() => {
                 color: 'blue',
                 textDecoration: 'none',
                 cursor: 'pointer',
+            },
+            spanValidation: {
+                color: 'red',
+                fontSize: '14px'
             }
         }
     )

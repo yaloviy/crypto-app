@@ -1,9 +1,14 @@
 import { SliderUnstyledValueLabelSlotPropsOverrides } from "@mui/base"
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form"
 
-export interface IPropsLogin  {
-    email: (value:string) => void,
-    password: (value:string) => void,
+export interface IPropsLogin<
+TFieldValues extends FieldValues = FieldValues,
+TContext = any,
+>  {
+    
     navigate: (to:string) => void,
+    register: UseFormRegister<TFieldValues>,
+    errors: FieldErrors<TFieldValues>
 }
 
 export interface IPropsRegister {
@@ -11,8 +16,14 @@ export interface IPropsRegister {
     username: (value:string) => void,
     email: (value:string) => void,
     password: (value:string) => void,
-    repeatPassword: (value:string) => void,
     navigate: (to:string) => void,
+    wrongFirstName: string,
+    wrongUsername: string,
+    wrongEmail: string,
+    wrongPassword: string,
+    repeatPassword: string,
+    setRepeatPassword: (value:string) => void,
+    validationRepeatPassword: string
 }
 
 export interface IAuthState {
@@ -39,4 +50,19 @@ export interface IWatchList {
     createdAt: string,
     updatedAt: string,
     user: null | number,
+}
+
+
+
+export interface userDataLogin {
+    email: string,
+    password: string,
+}
+
+
+export interface userDataRegister {
+    firstName: string,
+    username: string,
+    email: string,
+    password: string,
 }
