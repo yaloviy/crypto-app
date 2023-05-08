@@ -6,7 +6,8 @@ import { margin } from '@mui/system';
 import { IPropsLogin } from '../../../../common/types/auth/auth';
 import { jsx } from '@emotion/react';
 import { useStyles } from '../styles';
-
+import AppLoadingButton from '../../../common/loading-button';
+// import { useAppSelector } from '../../../utils/hook/hook';
 
 interface IForm {
     email: () => string,
@@ -14,8 +15,9 @@ interface IForm {
 }
 
 const Login: React.FC<IPropsLogin> = ( props: IPropsLogin ): JSX.Element => {
-    const {navigate, register, errors } = props
+    const {navigate, register, errors, loading } = props
     const classes = useStyles()
+    // const user = useAppSelector(state => state.auth)
     return (
         < > 
             <Typography variant="h2" fontFamily='Poppins' component="h2" textAlign='center'>Авторизация</Typography>
@@ -44,7 +46,8 @@ const Login: React.FC<IPropsLogin> = ( props: IPropsLogin ): JSX.Element => {
             {...register('password', )} 
              />
             
-            <Button type='submit' sx={{ fontFamily: 'Poppins', margin: 'auto', width: '40%', marginTop: 2, marginBottom: 2 }} size='medium' variant="contained">Войти!</Button>
+            {/* <Button type='submit' sx={{ fontFamily: 'Poppins', margin: 'auto', width: '40%', marginTop: 2, marginBottom: 2 }} size='medium' variant="contained">Войти!</Button> */}
+            <AppLoadingButton loading={loading} type='submit' sx={{ fontFamily: 'Poppins', margin: 'auto', width: '60%', marginTop: 2, marginBottom: 2 }} size='medium' variant="contained">Войти!</AppLoadingButton>
             <Typography variant="body1" fontFamily='Poppins' component="h2" textAlign='center'>У вас нет аккаунта? <span onClick={() => navigate('/register')} className={classes.incitingText}>Зарегистрироваться</span></Typography>
         </ >
     );

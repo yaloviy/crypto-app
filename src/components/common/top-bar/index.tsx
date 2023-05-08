@@ -17,7 +17,7 @@ import { ITopBarProps } from '../../../common/types/topbar';
 
 
 const TopBarComponent: React.FC<ITopBarProps> = ({isOpen, setIsOpen}:ITopBarProps):JSX.Element => {
-    const user = useAppSelector(state => state.auth)
+    const user = useAppSelector(state => state.auth.user.firstName)
     const theme =  useTheme()
     const colors = tokens(theme.palette.mode)
     const colorMode: any = useContext(ColorModeContext)
@@ -29,7 +29,7 @@ const TopBarComponent: React.FC<ITopBarProps> = ({isOpen, setIsOpen}:ITopBarProp
                 <IconButton className={classes.menuIcon} onClick={() => setIsOpen(!isOpen)}>
                     <MenuIcon /> 
                 </IconButton>
-                Welcome, {user.isLogin && (user.user.firstName)}
+                Welcome, {sessionStorage.getItem('firstName')}
             </Grid>
                 <Box display='flex' alignItems='center'>
                     <Grid sx={{pr: '37px', borderRight: `1px solid ${colors.mineShaft.DEFAULT}`}}>

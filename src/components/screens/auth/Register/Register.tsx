@@ -2,9 +2,10 @@ import React from 'react';
 import { TextField, Button, Typography } from '@mui/material'
 import { IPropsRegister } from '../../../../common/types/auth/auth';
 import { useStyles } from '../styles';
+import AppLoadingButton from '../../../common/loading-button';
 
 const Register: React.FC<IPropsRegister> = (props:IPropsRegister): JSX.Element => {
-    const { setPassword, navigate, setRepeatPassword, register, errors } = props
+    const { setPassword, navigate, setRepeatPassword, register, errors, loading } = props
     const classes = useStyles()
     return (
         <>
@@ -19,8 +20,8 @@ const Register: React.FC<IPropsRegister> = (props:IPropsRegister): JSX.Element =
             
             <TextField error={!!errors.confirmPassword} helperText={errors.confirmPassword ? `${errors.confirmPassword.message}` : ''} fullWidth={true} margin='normal' id="outlined-basic" label="Повторите ваш пароль" variant="outlined" placeholder='Пароль' type='password' {...register('confirmPassword')} />
             
-            <Button sx={{ fontFamily: 'Popins', margin: 'auto', width: '40%', marginTop: 2, marginBottom: 2 }} size='large' variant="contained" type="submit">Зарегистрироваться!</Button>
-            <Typography variant="body1" fontFamily='Popins' component="h2" textAlign='center'>У вас есть аккаунт? <span onClick={() => navigate('/login')} className={classes.incitingText}>Логин</span></Typography>
+            <AppLoadingButton  loading={loading} sx={{ fontFamily: 'Popins', margin: 'auto', width: 'fit-content', marginTop: 2, marginBottom: 2 }} size='large' variant="contained" type="submit">Зарегистрироваться!</AppLoadingButton>
+            <Typography  variant="body1" fontFamily='Popins' component="h2" textAlign='center'>У вас есть аккаунт? <span onClick={() => navigate('/login')} className={classes.incitingText}>Логин</span></Typography>
         </>
     );
 };

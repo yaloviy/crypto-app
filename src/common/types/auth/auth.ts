@@ -8,7 +8,8 @@ TContext = any,
     
     navigate: (to:string) => void,
     register: UseFormRegister<TFieldValues>,
-    errors: FieldErrors<TFieldValues>
+    errors: FieldErrors<TFieldValues>,
+    loading: boolean,
 }
 
 export interface IPropsRegister<
@@ -21,6 +22,7 @@ TContext = any,
     register: UseFormRegister<TFieldValues>,
     errors: FieldErrors<TFieldValues>,
     setRepeatPassword: (value:string) => void,
+    loading: boolean,
 }
 
 export interface IAuthState {
