@@ -9,7 +9,7 @@ import Register from './Register/Register';
 import { Box, fabClasses } from '@mui/material'
 import { axiosinstance } from '../../../utils/router/axios';
 import axios from 'axios';
-import { login } from '../../../components/store/slice/auth'
+// import { login } from '../../../components/store/slice/auth'
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
 import { useSelector } from 'react-redux';
 import { finished } from 'stream/promises';
@@ -26,6 +26,7 @@ import { DataArray } from '@mui/icons-material';
 
 import { LoginSchema } from '../../../utils/yup';
 import { RegisterSchema } from '../../../utils/yup';
+import { loginUser, registerUser } from '../../store/thrunks/auth';
 
 const Auth = () => {
     const classes = useStyles()
@@ -57,17 +58,10 @@ const Auth = () => {
         resolver: yupResolver(location.pathname === '/login' ? LoginSchema : RegisterSchema)
     })
 
-    console.log('errors', errors)
     const handleSubmitForm = async (data: any) => {
-        console.log('data', data)
         if (location.pathname === '/login') {
         try {
-            const userData = {
-                email: data.email,
-                password: data.password
-            }
-            const user = await axiosinstance.post('/auth/login', userData)
-                await dispatch(login(user.data))
+                await dispatch(loginUser(data))
                 navigate('/')
             }
 
@@ -78,10 +72,13 @@ const Auth = () => {
         } else if (location.pathname === '/register') {
             try {
                 const userData = {
-                    ...data
+                    firstName: data.firstName,
+                    username: data.username,
+                    email: data.email,
+                    password: data.password
                 }
-                const createUser = await axiosinstance.post('/auth/register', userData)
-                await dispatch(login(createUser.data))
+
+                await dispatch(registerUser(userData))
                 navigate('/')
                 
             } catch (error) {
@@ -89,6 +86,10 @@ const Auth = () => {
             }
         }
     }
+
+    const loading = useAppSelector(state => state.auth.isLoading)
+
+
     return (
         <div className='wrapper'>
             <form className={classes.root} onSubmit={handleSubmit(handleSubmitForm)}>
@@ -107,7 +108,7 @@ const Auth = () => {
                         errors={errors}
                         register={register}
                         navigate={navigate}
-                        
+                        loading={loading}
                          /> 
                         
                     : location.pathname === '/register' ? <Register 
@@ -117,7 +118,7 @@ const Auth = () => {
                         navigate={navigate}
                         register={register}
                         errors={errors}
-                    
+                        loading={loading}
                         /> 
                     : null}
                 </Box>

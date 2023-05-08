@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { loginUser, registerUser } from '../../thrunks/auth'
 
-import { loginUser } from '../../thrunks/auth'
+
 
 export interface IAuthState {
-    userinfo: object | IPublicUser,
+    user:  IPublicUser,
     isLogin: boolean,
-    token: string
+    token: string,
+    isLoading: boolean
+    
 }
 
 export interface IPublicUser {
@@ -29,7 +32,7 @@ export interface IWatchList {
 }
 
 
-const initialState: any = {
+const initialState: IAuthState = {
     user: {
         id: null,
         firstName: '',
@@ -47,7 +50,8 @@ const initialState: any = {
         }]
     },
     token: '',
-    isLogin: false
+    isLogin: false,
+    isLoading: false,
 }
 
 
@@ -55,21 +59,45 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login(state, action) {
-            state.user = action.payload.user
-            state.isLogin = true
-            state.token = action.payload.token
+        // login(state, action) {
+        //     state.user = action.payload.user
+        //     state.isLogin = true
+        //     state.token = action.payload.token
             
-        },
+        // },
     },
     extraReducers: (builder) => {
-        builder.addCase(loginUser.fulfilled, (state, action) => {
+        builder.addCase(loginUser.fulfilled, ( state, action ) => {
             state.user = action.payload.user
             state.isLogin = true
             state.token = action.payload.token
+            state.isLoading = false
+        })
+        builder.addCase(loginUser.pending, ( state, action ) => {
+            state.isLogin = false
+            state.isLoading = true
+        })
+        builder.addCase(loginUser.rejected, ( state, action ) => {
+            state.isLogin = false
+            state.isLoading = false
+        })
+        builder.addCase(registerUser.fulfilled, (state, action) => {
+            state.user = action.payload.user
+            state.isLogin = true
+            state.token = action.payload.token
+            state.isLoading = false
+        })
+        builder.addCase(registerUser.pending, (state, action) => {
+            state.isLogin = false
+            state.isLoading = true
+        })
+        builder.addCase(registerUser.rejected, (state, action) => {
+            state.isLogin = false
+            state.isLoading = false 
         })
     }
+    
 })
 
-export const { login } = authSlice.actions
+// export const { login } = authSlice.actions
 export default authSlice.reducer
