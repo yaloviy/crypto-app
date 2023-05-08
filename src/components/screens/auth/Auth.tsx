@@ -25,7 +25,7 @@ import { DataArray } from '@mui/icons-material';
 
 
 import { LoginSchema } from '../../../utils/yup';
-
+import { RegisterSchema } from '../../../utils/yup';
 
 const Auth = () => {
     const classes = useStyles()
@@ -53,8 +53,8 @@ const Auth = () => {
         },
         handleSubmit
     } = useForm({
-        mode: 'onBlur',
-        resolver: yupResolver(LoginSchema)
+        mode: 'onChange',
+        resolver: yupResolver(location.pathname === '/login' ? LoginSchema : RegisterSchema)
     })
 
     console.log('errors', errors)
@@ -78,10 +78,7 @@ const Auth = () => {
         } else if (location.pathname === '/register') {
             try {
                 const userData = {
-                    firstName,
-                    username,
-                    email,
-                    password,
+                    ...data
                 }
                 const createUser = await axiosinstance.post('/auth/register', userData)
                 await dispatch(login(createUser.data))
@@ -114,18 +111,13 @@ const Auth = () => {
                          /> 
                         
                     : location.pathname === '/register' ? <Register 
-                        firstName={setFirstName} 
-                        username={setUsername}
-                        email={setEmail}
-                        password={setPassword}
-                        repeatPassword={repeatPassword} 
-                        navigate={navigate}
-                        wrongFirstName={wrongFirstName}
-                        wrongUsername={wrongUsername}
-                        wrongEmail={wrongEmail}
-                        wrongPassword={wrongPassword}
+            
+                        setPassword={setPassword}
                         setRepeatPassword={setRepeatPassword}
-                        validationRepeatPassword={validationRepeatPassword}
+                        navigate={navigate}
+                        register={register}
+                        errors={errors}
+                    
                         /> 
                     : null}
                 </Box>
