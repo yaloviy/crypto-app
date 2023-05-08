@@ -11,19 +11,16 @@ TContext = any,
     errors: FieldErrors<TFieldValues>
 }
 
-export interface IPropsRegister {
-    firstName: (value:string) => void,
-    username: (value:string) => void,
-    email: (value:string) => void,
-    password: (value:string) => void,
+export interface IPropsRegister<
+TFieldValues extends FieldValues = FieldValues,
+TContext = any,
+>
+ {
+    setPassword: (value:string) => void,
     navigate: (to:string) => void,
-    wrongFirstName: string,
-    wrongUsername: string,
-    wrongEmail: string,
-    wrongPassword: string,
-    repeatPassword: string,
+    register: UseFormRegister<TFieldValues>,
+    errors: FieldErrors<TFieldValues>,
     setRepeatPassword: (value:string) => void,
-    validationRepeatPassword: string
 }
 
 export interface IAuthState {

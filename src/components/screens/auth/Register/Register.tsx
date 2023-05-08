@@ -4,21 +4,21 @@ import { IPropsRegister } from '../../../../common/types/auth/auth';
 import { useStyles } from '../styles';
 
 const Register: React.FC<IPropsRegister> = (props:IPropsRegister): JSX.Element => {
-    const {firstName, username, email, password, navigate, wrongFirstName, wrongUsername, wrongEmail, wrongPassword, repeatPassword, setRepeatPassword, validationRepeatPassword } = props
+    const { setPassword, navigate, setRepeatPassword, register, errors } = props
     const classes = useStyles()
     return (
         <>
             <Typography variant="h2" fontFamily='Popins' component="h2" textAlign='center'>Регистрация</Typography>
-            <TextField onChange={e => (firstName(e.target.value))} fullWidth={true} margin='normal' id="outlined-basic" label="Ваше имя" variant="outlined" placeholder='Введите ваше имя' />
-            <span className={classes.spanValidation}>{wrongFirstName}</span>
-            <TextField onChange={e => (username(e.target.value))} fullWidth={true} margin='normal' id="outlined-basic" label="Ваш логин" variant="outlined" placeholder='Придумайте логин' />
-            <span className={classes.spanValidation}>{wrongUsername}</span>
-            <TextField onChange={e => (email(e.target.value))} fullWidth={true} margin='normal' id="outlined-basic" label="Ваша почта" variant="outlined" placeholder='Введите вашу почту' type='text' />
-            <span className={classes.spanValidation}>{wrongEmail}</span>
-            <TextField onChange={e => (password(e.target.value))} fullWidth={true} margin='normal' id="outlined-basic" label="Ваш пароль" variant="outlined" placeholder='Придумайте пароль' type='password' />
-            <span className={classes.spanValidation}>{wrongPassword}</span>
-            <TextField onChange={(e) => setRepeatPassword(e.target.value)} fullWidth={true} margin='normal' id="outlined-basic" label="Повторите ваш пароль" variant="outlined" placeholder='Пароль' type='password' />
-            <span className={classes.spanValidation}>{validationRepeatPassword}</span>
+            <TextField error={!!errors.firstName} helperText={errors.firstName ? `${errors.firstName.message}` : ''} fullWidth={true} margin='normal' id="outlined-basic" label="Ваше имя" variant="outlined" placeholder='Введите ваше имя' {...register('firstName')} />
+            
+            <TextField error={!!errors.username} helperText={errors.username ? `${errors.username.message}` : ''} fullWidth={true} margin='normal' id="outlined-basic" label="Ваш логин" variant="outlined" placeholder='Придумайте логин' {...register('username')} />
+           
+            <TextField error={!!errors.email} helperText={errors.email ? `${errors.email.message}` : ''} fullWidth={true} margin='normal' id="outlined-basic" label="Ваша почта" variant="outlined" placeholder='Введите вашу почту' type='text' {...register('email')} />
+            
+            <TextField error={!!errors.password} helperText={errors.password ? `${errors.password.message}` : ''} fullWidth={true} margin='normal' id="outlined-basic" label="Ваш пароль" variant="outlined" placeholder='Придумайте пароль' type='password' {...register('password')} />
+            
+            <TextField error={!!errors.confirmPassword} helperText={errors.confirmPassword ? `${errors.confirmPassword.message}` : ''} fullWidth={true} margin='normal' id="outlined-basic" label="Повторите ваш пароль" variant="outlined" placeholder='Пароль' type='password' {...register('confirmPassword')} />
+            
             <Button sx={{ fontFamily: 'Popins', margin: 'auto', width: '40%', marginTop: 2, marginBottom: 2 }} size='large' variant="contained" type="submit">Зарегистрироваться!</Button>
             <Typography variant="body1" fontFamily='Popins' component="h2" textAlign='center'>У вас есть аккаунт? <span onClick={() => navigate('/login')} className={classes.incitingText}>Логин</span></Typography>
         </>
