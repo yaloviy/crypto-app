@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme:Theme) => {
             active: {
                 backgroundColor: '#1900D5 !important',
                 borderRadius: '4px', 
-                color: `${colors.white.DEFAULT}`,
+                color: `white !important`,
                 '& .MuiSvgIcon-root': {
                     color: 'white !important'
                 }

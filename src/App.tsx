@@ -16,6 +16,7 @@ import NewsComponent from './components/screens/News';
 import { Favorite } from '@mui/icons-material';
 import FavoriteComponent from './components/screens/Favorite';
 import WatchListComponent from './components/screens/WatchList';
+import AuthPrivateRoute from './utils/router/AuthPrivateRoute';
 
 
 function App() {
@@ -34,8 +35,8 @@ function App() {
                   <Route path='/favorite' element={<FavoriteComponent />} />
                   <Route path='/watchlist' element={<WatchListComponent />} />
                 </Route>
-                <Route path='/login' element={<Auth />} />
-                <Route path='/register' element={<Auth />} />
+                  <Route path='/login' element={<Auth />} />
+                  <Route path='/register' element={<Auth />} />
               </Route>
                 
             </Routes>
