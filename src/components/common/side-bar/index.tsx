@@ -25,7 +25,6 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
     const colors = tokens(theme.palette.mode)
     useEffect(() => {
         setActive(pathname)
-        console.log(active)
     }, [pathname])
     return (<Box className={classes.root}>
     

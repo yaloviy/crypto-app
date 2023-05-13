@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
 import authSlice from './slice/auth'
-
+import  assetSlice  from './slice/assets'
 
 const store = configureStore({
     reducer: {
         auth: authSlice,
+        asset: assetSlice
+        
     }
 })
 

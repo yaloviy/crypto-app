@@ -8,7 +8,6 @@ export const loginUser = createAsyncThunk(
     async (data:userDataLogin, {rejectWithValue})  => {
         try {
             const user = await axiosinstance.post('/auth/login', data)
-            console.log(user)
             sessionStorage.setItem('token', user.data.token)
             sessionStorage.setItem('firstName', user.data.user.firstName)
             return user.data

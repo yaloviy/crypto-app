@@ -5,3 +5,10 @@ export const axiosinstance = axios.create({
     timeout: 1000,
     headers: {'X-Custom-Header': 'foobar'}
   });
+
+
+  export const coinGeckoApi = axios.create({
+    baseURL: 'https://api.coingecko.com/api/v3',
+    timeout: 1000,
+    headers: {'X-Custom-Header': 'foobar'}
+  });
