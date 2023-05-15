@@ -27,6 +27,7 @@ import { DataArray } from '@mui/icons-material';
 import { LoginSchema } from '../../../utils/yup';
 import { RegisterSchema } from '../../../utils/yup';
 import { loginUser, registerUser } from '../../store/thrunks/auth';
+import { rejectLogin } from '../../store/slice/auth';
 
 const Auth = () => {
     const classes = useStyles()
