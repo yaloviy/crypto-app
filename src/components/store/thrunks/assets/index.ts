@@ -5,7 +5,7 @@ export const getCoinGeckoAssets = createAsyncThunk(
     'coins/markets',
     async (data:string, {rejectWithValue})  => {
         try {
-           const assets = await coinGeckoApi.get(`/coins/${data}/market_chart?vs_currency=usd&days=1`)
+           const assets = await coinGeckoApi.get(`/coins/${data}/market_chart?vs_currency=usd&days=7`)
            return {name: data, data: assets.data}
             
         } catch (error:any) {

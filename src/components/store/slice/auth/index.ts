@@ -65,6 +65,10 @@ const authSlice = createSlice({
         //     state.token = action.payload.token
             
         // },
+        rejectLogin(state,action) {
+            console.log(action)
+            state.isLoading = false
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, ( state, action ) => {
@@ -99,5 +103,5 @@ const authSlice = createSlice({
     
 })
 
-// export const { login } = authSlice.actions
+export const { rejectLogin } = authSlice.actions
 export default authSlice.reducer

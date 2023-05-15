@@ -8,11 +8,10 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { Box, Grid } from '@mui/material';
 
 import { useStyles } from './style';
-import { calendarPickerSkeletonClasses } from '@mui/lab';
-import { AnyAaaaRecord } from 'dns';
+import AreaChartComponent from '../../common/charts/area-chart';
 
 
-export const Home = () => {
+export const Home: React.FC  = ():JSX.Element => {
     const dispatch = useAppDispatch()
     const assets = useAppSelector(state => state.asset)
     const getFavoriteAsset: any[] = useAppSelector(state => state.asset.favoriteAssets)
@@ -28,8 +27,6 @@ export const Home = () => {
 
 
     const filteredArray = getFavoriteAsset.filter((value:any, index, self) => index === self.findIndex((t:any) => t.name === value.name))
-    console.log(filteredArray)
-
     const getFavoriteAssets = useCallback((data:any) => {
         data.forEach((el:string) => {
             dispatch(getCoinGeckoAssets(el))
@@ -45,9 +42,10 @@ export const Home = () => {
         getFavoriteAssets(favoriteAssets)
     }, [favoriteAssets, getFavoriteAssets])
 
-    const renderFavoriteBlock = filteredArray.map((el:any, id) => {
+    const renderFavoriteBlock = filteredArray.map((el:any, id) =>  {
         const elPrice = el.data.prices[0][1].toFixed(3)
         const currentCap = el.data.market_caps[0][1].toFixed(0)
+        console.log(el)
         return (
             <Grid  item key={id} lg={6} md={6} xs={12}>
                     <Grid container className={classes.card}>
@@ -59,7 +57,7 @@ export const Home = () => {
                             </Box>
                         </Box>
                         <Grid item lg={6} md={6} xs={12}>
-                            <h5>график</h5>
+                            <AreaChartComponent data={el.data.prices}></AreaChartComponent>
                         </Grid>
                     </Grid>
             </Grid>
