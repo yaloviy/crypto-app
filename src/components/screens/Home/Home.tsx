@@ -16,12 +16,13 @@ import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 
 
 import waitingForDownload from '../../../assets/images/99px_ru_animacii_10620_kot_prjachetsja_v_chashke.gif'
-
+import LineСhartComponent from '../../common/charts/line-chart';
+import { IFavoriteAssets } from '../../../common/types/assets';
 
 export const Home: React.FC  = ():JSX.Element => {
     const dispatch = useAppDispatch()
     const assets = useAppSelector(state => state.asset)
-    const getFavoriteAsset: any[] = useAppSelector(state => state.asset.favoriteAssets)
+    const getFavoriteAsset: IFavoriteAssets[] = useAppSelector(state => state.asset.favoriteAssets)
     const favoriteIsLoading: boolean = useAppSelector(state => state.asset.isLoading)
     const classes = useStyles()
     const fetchDataRef = useRef(false)
@@ -80,9 +81,15 @@ export const Home: React.FC  = ():JSX.Element => {
 
     return (
             <Box className={classes.root}>
-                <Grid className={classes.container} container spacing={2}>
+                <Grid className={classes.areaChart} container spacing={2}>
                     {renderFavoriteBlock}
                 </Grid>
+                <Box className={classes.lineChart} >
+                   <Grid  item lg={12} md={12} xs={12}>
+                    {filteredArray.length && <LineСhartComponent data={filteredArray}  />}
+                   </Grid>
+                </Box>
+                1
             </Box>
     );
 };

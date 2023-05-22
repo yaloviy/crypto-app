@@ -9,8 +9,10 @@ export const useStyles = makeStyles((theme: Theme) => {
     return {
         root: {
             flexGrow: 1,
-            width: '100%',
-            height: '100%'
+            padding: 32
+        },
+        areaChart: {
+            marginBottom: '32px'
         },
         container: {
             padding: '32px',
@@ -82,7 +84,20 @@ export const useStyles = makeStyles((theme: Theme) => {
             fontSize: '12px',
             lineHeight: '18px',
 
-        }
+        },
+        lineChart: {
+            backgroundColor: `${
+                theme.palette.mode === 'light'
+                    ? colors.primary.DEFAULT
+                    : colors.primary[600]
+            }`,
+            padding: '20px 16px',
+            marginBottom: 32,
+            minHeight: 270,
+            border: `1px solid ${colors.borderColor}`,
+            borderRadius: 12,
+        },
+        
 
     }
 })
