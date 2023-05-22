@@ -9,10 +9,16 @@ export const useStyles = makeStyles((theme: Theme) => {
     return {
         root: {
             flexGrow: 1,
+            width: '100%',
+            height: '100%'
         },
         container: {
             padding: '32px',
-            
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            height: '100%'
         },
         card: {
             backgroundColor: `${theme.palette.mode === 'light' ? colors.primary.DEFAULT : '#232323'}`,
@@ -40,6 +46,43 @@ export const useStyles = makeStyles((theme: Theme) => {
            justifyContent: 'flex-end',
            flexDirection: 'column'
 
+        },
+        cardInfoPercentage: {
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'center',
+            marginTop: '10px'
+        },
+        cardPercentageUp: {
+            display: 'flex',
+            alignItems: 'center',
+            padding: '4px 8px',
+            justifyContent: 'center',
+            backgroundColor: colors.price_percentage.up,
+            borderRadius: '4px',
+            gap: '5px',
+            color: '#037400',
+            fontFamily: 'Poppins',
+            fontStyle: 'normal',
+            fontWeight: '400',
+            fontSize: '12px',
+            lineHeight: '18px',
+
+        },
+        cardPercentageDown: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: colors.price_percentage.down,
+            borderRadius: '4px',
+            color: '#740000',
+            fontFamily: 'Poppins',
+            fontStyle: 'normal',
+            fontWeight: '400',
+            fontSize: '12px',
+            lineHeight: '18px',
+
         }
+
     }
 })

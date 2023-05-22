@@ -12,7 +12,7 @@ const initialState:any = {
     favoriteAssets: [
         
     ],
-    isLoading: false
+    isLoading: true
 }
 
 

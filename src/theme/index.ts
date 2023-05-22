@@ -43,9 +43,17 @@ export const tokens = (mode: string) => ({
               blue: '#1900D5',
               mineShaft:  {
                 DEFAULT: '#3C3C3C',
+              },
+              price_percentage: {
+                up: '#A9FFA7',
+                down: '#FFA7A7'
               }
           }
         : {
+            price_percentage: {
+                up: '#A9FFA7',
+                down: '#FFA7A7'
+            },
             mineShaft:  {
                 DEFAULT: '#3C3C3C',
               },
