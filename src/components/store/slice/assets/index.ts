@@ -1,7 +1,8 @@
+import { Satellite } from '@mui/icons-material'
 import { createSlice } from '@reduxjs/toolkit'
 
 
-import { getCoinGeckoAssets } from '../../thrunks/assets'
+import { getCoinGeckoAssets, getTopPriceData } from '../../thrunks/assets'
 
 
 
@@ -11,6 +12,9 @@ const initialState:any = {
     ],
     favoriteAssets: [
         
+    ],
+    topPriceData: [
+
     ],
     isLoading: true
 }
@@ -31,6 +35,9 @@ export const assetSlice = createSlice({
         })
         builder.addCase(getCoinGeckoAssets.rejected, (state, action) => {
             
+        })
+        builder.addCase(getTopPriceData.fulfilled, (state,action) => {
+            state.topPriceData = action.payload
         })
     }
 })

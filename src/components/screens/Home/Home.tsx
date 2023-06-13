@@ -2,9 +2,9 @@
 
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
 import TopBarComponent from '../../common/top-bar';
-import { getCoinGeckoAssets } from '../../store/thrunks/assets';
+import { getCoinGeckoAssets, getTopPriceData } from '../../store/thrunks/assets';
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { Box, Grid, Icon } from '@mui/material';
 
 import { useStyles } from './style';
@@ -15,45 +15,47 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 
 
-import waitingForDownload from '../../../assets/images/99px_ru_animacii_10620_kot_prjachetsja_v_chashke.gif'
 import LineСhartComponent from '../../common/charts/line-chart';
-import { IFavoriteAssets } from '../../../common/types/assets';
+import { IChartData, ISingleAsset } from '../../../common/types/assets';
+import TopPriceComponent from '../../common/top-price';
 
 export const Home: React.FC  = ():JSX.Element => {
     const dispatch = useAppDispatch()
     const assets = useAppSelector(state => state.asset)
-    const getFavoriteAsset: IFavoriteAssets[] = useAppSelector(state => state.asset.favoriteAssets)
+    const getFavoriteAsset: IChartData[] = useAppSelector(state => state.asset.favoriteAssets)
     const favoriteIsLoading: boolean = useAppSelector(state => state.asset.isLoading)
     const classes = useStyles()
     const fetchDataRef = useRef(false)
-
+    const topPriceData:any = useAppSelector(state => state.asset.topPriceData)
     
 
     const [favoriteAssets, setFaviriteAssets] = useState([
         'bitcoin', 'ethereum'
     ])
-    console.log(getFavoriteAsset)
 
     const filteredArray = getFavoriteAsset.filter((value:any, index, self) => index === self.findIndex((t:any) => t.name === value.name))
+
     const getFavoriteAssets = useCallback((data:any) => {
         data.forEach((el:string) => {
             dispatch(getCoinGeckoAssets(el))
             
         })
-    }, [dispatch]
+    }, [dispatch])
 
-    )
+    const filteredTopPriceData = topPriceData.slice().sort((a:any,b:any) => (b.current_price - a.current_price))
  
     useEffect(() => {
         if (fetchDataRef.current) return
         fetchDataRef.current = true
         getFavoriteAssets(favoriteAssets)
+        dispatch(getTopPriceData())
     }, [favoriteAssets, getFavoriteAssets])
 
     const renderFavoriteBlock = filteredArray.map((el:any, id) =>  {
-        const elPrice = el.data[el.data.length-1][1].toFixed(3)
-        const changePrice = el.singleAsset.price_change_24h.toFixed(2)
-        const changePricePercentage = el.singleAsset.price_change_percentage_24h.toFixed(0)
+        const elPrice = el.data[el.data.length-1][1].toFixed(2)
+        let changePrice = el.singleAsset.price_change_24h.toFixed(2)
+        let changePricePercentage = el.singleAsset.price_change_percentage_24h.toFixed(2)
+
         return (
             <Grid  item key={id} lg={6} md={6} xs={12}>
                     <Grid container className={classes.card}>
@@ -89,7 +91,11 @@ export const Home: React.FC  = ():JSX.Element => {
                     {filteredArray.length && <LineСhartComponent data={filteredArray}  />}
                    </Grid>
                 </Box>
-                1
+                <Grid container>
+                <Grid className={classes.topPrice}  item lg={12} md={12} xs={12}>
+                        <TopPriceComponent topPriceData={filteredTopPriceData.slice(0, 5)}></TopPriceComponent>
+                   </Grid>
+                </Grid>
             </Box>
     );
 };

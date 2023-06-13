@@ -29,14 +29,19 @@ ChartJS.register(
 const LineСhartComponent = ({data}:any) => {
   const options = {
     responsive: true,
+    scales: {
+      x: {
+        display: false
+      }
+    },
     plugins: {
       legend: {
-        display:false,
+        display:true,
         position: 'top' as const,
       },
       title: {
         display: false,
-        text: 'Chart.js Line Chart',
+        text: 'Bitcoin',
       },
     },
   };
@@ -47,7 +52,7 @@ const LineСhartComponent = ({data}:any) => {
     labels: data[0].data.map((el:any) => moment(el[0]).format('DD.MM')),
     datasets: [
       {
-        label: data[0].name,
+        label: data[0].name[0].toUpperCase() + data[0].name.slice(1).toLowerCase(),
         data: data[0].data.map((el:any) => el[1]),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',

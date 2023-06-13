@@ -11,8 +11,10 @@ export const useStyles = makeStyles((theme:Theme) => {
             root: {
                 backgroundColor: `${colors.primary.DEFAULT} !important`,
                 
+                
             },
             drawer: {
+                
                 '&. MuiDrawer-paper': {
                     boxSizing: 'border-box',
                     height: '100%',
