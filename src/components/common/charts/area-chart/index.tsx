@@ -15,7 +15,7 @@ import { Line } from 'react-chartjs-2';
 
 
 import moment from 'moment'
-import { IPropsChart } from '../../../../common/types/assets';
+import { IAreaChartProps } from '../../../../common/types/assets';
 
 ChartJS.register(
   CategoryScale,
@@ -52,7 +52,7 @@ export const options = {
 
 
 
-const AreaChartComponent = (props:IPropsChart) => {
+const AreaChartComponent = (props:IAreaChartProps) => {
   const { data } = props
   const values = {
     labels: data.map((el:number[]) => moment(el[0]).format('DD.MM.YY')),

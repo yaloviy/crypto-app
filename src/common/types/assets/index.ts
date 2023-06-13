@@ -1,103 +1,53 @@
-export interface IPropsChart {
-    data: [number[]]
+export interface IAreaChartProps {
+    data: number[][]
 }
 
-
-
-interface IRoi {
-    currency
-: 
-string
-percentage
-: 
-number
-times
-: 
-number
+export interface ILineChartProps {
+    data: any
 }
 
-interface ISignleAsset {
-    ath:number,
-   
-    ath_change_percentage
-    : 
-    number,
-    ath_date
-    : 
-    string,
-    atl
-    : 
-    number,
-    atl_change_percentage
-    : 
-    number,
-    atl_date
-    : 
-    string,
-    circulating_supply
-    : 
-    number,
-    current_price
-    : 
-    number,
-    fully_diluted_valuation
-    : 
-    number,
-    high_24h
-    : 
-    number,
-    id
-    : 
-    string,
-    image
-    : 
-    string,
-    last_updated
-    : 
-    string,
-    low_24h
-    : 
-    number,
-    market_cap
-    : 
-    number,
-    market_cap_change_24h
-    : 
-    number,
-    market_cap_change_percentage_24h
-    : 
-    number,
-    market_cap_rank
-    : 
-    number,
-    max_supply
-    : 
-    number,
-    name
-    : 
-    string,
-    price_change_24h
-    : 
-    number,
-    price_change_percentage_24h
-    : 
-    number,
-    roi
-    : 
-    null | IRoi
-    symbol
-    : 
-    string
-    total_supply
-    : 
-    number
-    total_volume
-    : 
-    number
+interface Roi {
+    times: number
+    currency: string
+    percentage: number
 }
 
-export interface IFavoriteAssets {
-    name: string,
-    data: number[][],
-    singleAsset: ISignleAsset[]
+export interface ISingleAsset {
+    [x: string]: any
+    id: string
+    symbol: string
+    name: string
+    image: string
+    current_price: number
+    market_cap: any
+    market_cap_rank: number
+    fully_diluted_valuation: any
+    total_volume: any
+    high_24h: number
+    low_24h: number
+    price_change_24h: number
+    price_change_percentage_24h: number
+    market_cap_change_24h: number
+    market_cap_change_percentage_24h: number
+    circulating_supply: number
+    total_supply: number
+    max_supply?: number
+    ath: number
+    ath_change_percentage: number
+    ath_date: Date
+    atl: number
+    atl_change_percentage: number
+    atl_date: Date
+    roi: Roi
+    last_updated: Date
+}
+
+export interface IChartData {
+    name: string
+    data: number[][]
+    singleAsset: ISingleAsset[]
+}
+
+export interface ITablePriceData {
+    assets: ISingleAsset[]
 }
