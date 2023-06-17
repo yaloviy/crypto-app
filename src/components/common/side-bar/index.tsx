@@ -15,6 +15,8 @@ import { navMenu } from '../../../common/moks/navigate';
 
 import { tokens } from '../../../theme';
 import { ISideBarProps } from '../../../common/types/sidebar';
+import ThemeSwitch from '../theme-switch';
+import SearchBarComponent from '../search-bar';
 
 const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawerWidth}:ISideBarProps): JSX.Element => {
     const classes = useStyles()
@@ -26,7 +28,20 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
     useEffect(() => {
         setActive(pathname)
     }, [pathname])
+
+    const renderMenu = navMenu.map(el => 
+        (<ListItem  key={el.id}>
+            <ListItemButton className={active === el.path ? classes.active : classes.navitem} onClick={() => navigate(`${el.path}`)} key={el.id}>
+                <ListItemIcon>{el.icon}</ListItemIcon>
+                <ListItemText>
+                    <Typography variant='body1'>{el.name}</Typography>
+                </ListItemText>
+                </ListItemButton>
+            </ListItem>))
+
     return (<Box className={classes.root}>
+
+        
     
             
             {isOpen && (
@@ -49,8 +64,9 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
                         
                     }}
                     
-                >
+                >   
                     <Box className={classes.topBox} > 
+
                         <Box width='100%'>
                             <FlexBetween>
                                 <Box className={classes.brand} >
@@ -63,13 +79,28 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
                                 )}
                             </FlexBetween>
                         </Box>
+                        
                         <List className={classes.navList}>
-                            {navMenu.map(el => (<ListItem  key={el.id}><ListItemButton className={active === el.path ? classes.active : classes.navitem} onClick={() => navigate(`${el.path}`)} key={el.id}><ListItemIcon>{el.icon}</ListItemIcon><ListItemText><Typography variant='body1'>{el.name}</Typography></ListItemText></ListItemButton></ListItem>))}
+                        {!isNonMobile && (<List>
+                            <ListItem>
+                                <SearchBarComponent />
+                            </ListItem>
+                        </List>) }
+                            {renderMenu}
                         </List>
                     </Box>
                     <Box className={classes.bottomBox}>
                         <List>
                             <ListItem>
+                                <ListItemButton>
+                                {!isNonMobile && (
+                                
+                                    <ThemeSwitch />
+                                
+                            )}
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem >
                                 <ListItemButton className={classes.navitem}>
                                     <ListItemIcon>
                                         <MeetingRoom />

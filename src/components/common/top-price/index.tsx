@@ -4,7 +4,6 @@ import { ISingleAsset } from '../../../common/types/assets';
 
 const TopPriceComponent = (props: any) => {
     const {topPriceData } = props
-      
     return (
         <>
         <TableContainer component={Paper}>

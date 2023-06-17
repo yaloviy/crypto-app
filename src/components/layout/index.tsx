@@ -13,7 +13,7 @@ import { useStyles } from '../layout/styles';
 const LayoutComponent = (): JSX.Element => {
 
     const location  = useLocation()
-    const isNonMobile = useMediaQuery('(min-width:600px)')
+    const isNonMobile = useMediaQuery('(min-width:900px)')
 
     const [isOpen, setIsOpen] = useState(true)
 
@@ -32,7 +32,7 @@ const LayoutComponent = (): JSX.Element => {
             <Box display={isNonMobile === true ? 'flex' : 'block'} width='100%' height='100%'>
                 <SideBar isNonMobile={isNonMobile} drawerWidth='250px' isOpen={isOpen} setIsOpen={setIsOpen} />
                 <Box className={classes.mainSection}>
-                    <TopBarComponent  isOpen={isOpen} setIsOpen={setIsOpen}/> 
+                    <TopBarComponent  isOpen={isOpen} setIsOpen={setIsOpen} isNonMobile={isNonMobile}/> 
                     <Outlet />
                 </Box>
             </Box>
