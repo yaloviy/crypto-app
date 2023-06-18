@@ -2,10 +2,10 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ILayout } from '../../common/types/layout/index'
-import TopBarComponent from '../common/top-bar';
+import TopBarComponent from '../common components/top-bar';
 import { useMediaQuery } from '@mui/material'
 import {Box} from '@mui/material'
-import SideBar from '../common/side-bar';
+import SideBar from '../common components/side-bar';
 import {useState} from 'react'
 import { useStyles } from '../layout/styles';
 

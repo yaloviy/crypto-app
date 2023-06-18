@@ -29,7 +29,7 @@ import { RegisterSchema } from '../../../utils/yup';
 import { loginUser, registerUser } from '../../store/thrunks/auth';
 import { rejectLogin } from '../../store/slice/auth';
 
-const Auth = () => {
+const AuthPage = () => {
     const classes = useStyles()
     const location = useLocation()
     const [firstName, setFirstName] = useState('')
@@ -128,4 +128,4 @@ const Auth = () => {
     );
 };
 
-export default Auth; 
+export default AuthPage; 

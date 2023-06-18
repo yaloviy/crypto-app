@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField, Button, Typography } from '@mui/material'
 import { IPropsRegister } from '../../../../common/types/auth/auth';
 import { useStyles } from '../styles';
-import AppLoadingButton from '../../../common/loading-button';
+import AppLoadingButton from '../../../common components/loading-button';
 
 const Register: React.FC<IPropsRegister> = (props:IPropsRegister): JSX.Element => {
     const { setPassword, navigate, setRepeatPassword, register, errors, loading } = props

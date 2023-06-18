@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewsComponent = () => {
+const NewsPage = () => {
     return (
         <>
             news component
@@ -8,4 +8,4 @@ const NewsComponent = () => {
     );
 };
 
-export default NewsComponent;
+export default NewsPage;

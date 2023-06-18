@@ -2,26 +2,20 @@ import { Grid, colors, IconButton, useTheme, InputBase, Stack, Autocomplete, Tex
 import SearchIcon from '@mui/icons-material/Search';
 import { useStyles } from './style';
 import { ColorModeContext, tokens } from '../../../theme';
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useAppSelector } from '../../../utils/hook/hook';
 import { elements } from 'chart.js';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBarComponent = () => {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
-    const classes = useStyles()
-    const colorMode: any = useContext(ColorModeContext)
     const topPriceData:any = useAppSelector(state => state.asset.topPriceData)
+    const [selectedItem, SetSelectedItem] = useState<string | null>('')
+    const navigate = useNavigate()
+
     return (
-        // <Grid className={classes.searchBlock}>
-        //                 <IconButton className={classes.searchIcon} sx={{padding: '12px'}}> 
-        //                     <SearchIcon /> 
-        //                 </IconButton>
-        //                 <InputBase className={classes.searchInput} placeholder='Поиск...' />
-        // </Grid>
         <Stack spacing={2} sx={{width: '300px'}}>
             <Autocomplete 
-            freeSolo
+            onChange={(e:any, value:string | null) => navigate(`single/:${value}`)}
             renderInput={(el) => (<TextField {...el} label='Поиск...' inputProps={{ ...el.inputProps, type: 'search' }}/>)} 
             options={topPriceData.map((el: {name:string}) => el.name)}></Autocomplete>
         </Stack>
