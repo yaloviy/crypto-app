@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FavoriteComponent = () => {
+const FavoritePage = () => {
     return (
         <>
             favorite component
@@ -8,4 +8,4 @@ const FavoriteComponent = () => {
     );
 };
 
-export default FavoriteComponent;
+export default FavoritePage;

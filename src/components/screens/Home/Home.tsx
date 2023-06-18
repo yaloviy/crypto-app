@@ -1,25 +1,25 @@
 
 
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
-import TopBarComponent from '../../common/top-bar';
+import TopBarComponent from '../../common components/top-bar';
 import { getCoinGeckoAssets, getTopPriceData } from '../../store/thrunks/assets';
 
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { Box, Grid, Icon } from '@mui/material';
 
 import { useStyles } from './style';
-import AreaChartComponent from '../../common/charts/area-chart';
+import AreaChartComponent from '../../common components/charts/area-chart';
 
 
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 
 
-import LineСhartComponent from '../../common/charts/line-chart';
+import LineСhartComponent from '../../common components/charts/line-chart';
 import { IChartData, ISingleAsset } from '../../../common/types/assets';
-import TopPriceComponent from '../../common/top-price';
+import TopPriceComponent from '../../common components/top-price';
 
-export const Home: React.FC  = ():JSX.Element => {
+export const HomePage: React.FC  = ():JSX.Element => {
     const dispatch = useAppDispatch()
     const assets = useAppSelector(state => state.asset)
     const getFavoriteAsset: IChartData[] = useAppSelector(state => state.asset.favoriteAssets)
@@ -101,4 +101,4 @@ export const Home: React.FC  = ():JSX.Element => {
 };
 
 
-export default Home
+export default HomePage

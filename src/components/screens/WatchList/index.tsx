@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WatchListComponent = () => {
+const WatchListPage = () => {
     return (
         <>
             watchlist
@@ -8,4 +8,4 @@ const WatchListComponent = () => {
     );
 };
 
-export default WatchListComponent;
+export default WatchListPage;

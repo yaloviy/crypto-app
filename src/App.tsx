@@ -2,21 +2,22 @@ import React from 'react';
 
 import './App.css';
 
-import Home from './components/screens/Home/Home';
+import HomePage from './components/screens/Home/Home';
 import PrivateRoute from './utils/router/PrivateRoute';
 import { Routes, Route } from 'react-router-dom'
 import Login from './components/screens/auth/Login/Login';
-import Register from './components/screens/auth/Register/Register';
-import Auth from './components/screens/auth/Auth';
+import RegisterPage from './components/screens/auth/Register/Register';
+import AuthPage from './components/screens/auth/Auth';
 import { ColorModeContext, useMode } from './theme/index'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import LayoutComponent from './components/layout/index';
-import SettingsComponent from './components/screens/Settings';
-import NewsComponent from './components/screens/News';
+import SettingsPage from './components/screens/Settings';
+import NewsPage from './components/screens/News';
 import { Favorite } from '@mui/icons-material';
-import FavoriteComponent from './components/screens/Favorite';
-import WatchListComponent from './components/screens/WatchList';
-import AuthPrivateRoute from './utils/router/AuthPrivateRoute';
+import FavoritePage from './components/screens/Favorite';
+import WatchListPage from './components/screens/WatchList';
+import SingleAssetPage from './components/screens/singe-asset';
+
 
 
 function App() {
@@ -29,14 +30,15 @@ function App() {
             <Routes>
               <Route element={<LayoutComponent />}>
                 <Route element={<PrivateRoute />} >
-                  <Route path='/' element={<Home />} />
-                  <Route path='/settings' element={<SettingsComponent />} />
-                  <Route path='/news' element={<NewsComponent />} />
-                  <Route path='/favorite' element={<FavoriteComponent />} />
-                  <Route path='/watchlist' element={<WatchListComponent />} />
+                  <Route path='/' element={<HomePage />} />
+                  <Route path='/settings' element={<SettingsPage />} />
+                  <Route path='/news' element={<NewsPage />} />
+                  <Route path='/favorite' element={<FavoritePage />} />
+                  <Route path='/watchlist' element={<WatchListPage />} />
+                  <Route path='/single/:id' element={<SingleAssetPage />} />
                 </Route>
-                  <Route path='/login' element={<Auth />} />
-                  <Route path='/register' element={<Auth />} />
+                  <Route path='/login' element={<AuthPage />} />
+                  <Route path='/register' element={<AuthPage />} />
               </Route>
                 
             </Routes>

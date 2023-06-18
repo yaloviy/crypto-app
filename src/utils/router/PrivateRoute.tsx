@@ -7,7 +7,7 @@ const PrivateRoute = () => {
     const auth = useAuth()
     return (
         <div>
-            {auth ? <Outlet /> : <Navigate to='/login' />}
+            {sessionStorage.getItem('token') ? <Outlet /> : auth ? <Outlet /> : <Navigate to='/login' />}
         </div>
     );
 };

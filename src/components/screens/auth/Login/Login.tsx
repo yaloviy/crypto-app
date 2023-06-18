@@ -6,7 +6,7 @@ import { margin } from '@mui/system';
 import { IPropsLogin } from '../../../../common/types/auth/auth';
 import { jsx } from '@emotion/react';
 import { useStyles } from '../styles';
-import AppLoadingButton from '../../../common/loading-button';
+import AppLoadingButton from '../../../common components/loading-button';
 // import { useAppSelector } from '../../../utils/hook/hook';
 
 interface IForm {
