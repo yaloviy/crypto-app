@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { coinGeckoApi } from "../../../../utils/router/axios"
+import { axiosinstance, axiosinstanceAuth, coinGeckoApi } from "../../../../utils/router/axios"
 
 export const getCoinGeckoAssets = createAsyncThunk(
     'coins/markets',
@@ -35,6 +35,49 @@ export const getTopPriceData = createAsyncThunk(
             
            return assets.data
             
+        } catch (error:any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message)
+            }  else {
+                return rejectWithValue(error.message)
+            }
+        }
+    }
+
+)
+
+
+export const createWatchList = createAsyncThunk(
+    'watchlist/create',
+    async (data: {name: string; assetId: string}, {rejectWithValue})  => {
+        try {
+           
+           await axiosinstanceAuth.post('/watchlist/create', data)
+            
+            
+        } catch (error:any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message)
+            }  else {
+                return rejectWithValue(error.message)
+            }
+        }
+    }
+
+)
+
+
+
+export const getWatchList = createAsyncThunk(
+    'watchlist/get',
+    async (_, {rejectWithValue})  => {
+        try {
+           
+           const userAssets = await axiosinstanceAuth.get('/watchlist/get-elements')
+            
+           return userAssets.data
+            
+
         } catch (error:any) {
             if (error.response && error.response.data.message) {
                 return rejectWithValue(error.response.data.message)
