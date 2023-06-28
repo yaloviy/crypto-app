@@ -1,10 +1,12 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Grid } from '@mui/material';
 import React from 'react';
+import { useStyles } from './style';
 
 const AssetsTableComponent = (props: any) => {
     const {assets} = props
+    const classes = useStyles()
     return (
-        <>
+        <Grid item xs={12} className={classes.topPrice}>
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -32,7 +34,7 @@ const AssetsTableComponent = (props: any) => {
         </TableBody>
       </Table>
     </TableContainer>
-        </>
+    </Grid>
     );
 };
 

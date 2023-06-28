@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
 import AssetsTableComponent from '../../common components/assetTable';
@@ -17,18 +18,20 @@ const WatchListPage = () => {
         })
     })
 
+
+    console.log(filteredArray)
+    
+
     useEffect(() => {
         dispatch(getTopPriceData())
         dispatch(getWatchList())
     }, [])
 
-    console.log(watchlistAssets)
-    console.log(topPriceData)
-    console.log(filteredArray)
-
     return (
         <>
+        <Grid item xs={12} sx={{padding: 5}}>
             <AssetsTableComponent assets={filteredArray}></AssetsTableComponent>
+        </Grid>
         </>
     );
 };

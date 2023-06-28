@@ -17,7 +17,6 @@ import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 
 import LineСhartComponent from '../../common components/charts/line-chart';
 import { IChartData, ISingleAsset } from '../../../common/types/assets';
-import TopPriceComponent from '../../common components/top-price';
 import AssetsTableComponent from '../../common components/assetTable';
 
 export const HomePage: React.FC  = ():JSX.Element => {
@@ -92,11 +91,9 @@ export const HomePage: React.FC  = ():JSX.Element => {
                     {filteredArray.length && <LineСhartComponent data={filteredArray}  />}
                    </Grid>
                 </Box>
-                <Grid container>
-                    <Grid className={classes.topPrice}  item lg={12} md={12} xs={12}>
-                        <AssetsTableComponent assets={filteredTopPriceData.slice(0, 5)} />
-                   </Grid>
-                </Grid>
+                
+                    <AssetsTableComponent assets={filteredTopPriceData.slice(0, 5)} />
+                
             </Box>
     );
 };
