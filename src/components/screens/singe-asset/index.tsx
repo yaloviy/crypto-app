@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid, Typography } from '@mui/material';
+import { Alert, AlertColor, Avatar, Box, Grid, Snackbar, Typography } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
@@ -19,7 +19,8 @@ const SingleAssetPage: FC = (): JSX.Element =>   {
     const { id } = useParams()
     const topPriceData:any = useAppSelector(state => state.asset.topPriceData)
 
-
+    const [open, setOpen] = useState(false)
+    const [severity, setSeverity] = useState<AlertColor | undefined>('success')
     
     const asset =  topPriceData.find((el:any) => el.name === id?.slice(1))
     
@@ -30,9 +31,21 @@ const SingleAssetPage: FC = (): JSX.Element =>   {
     const dispatch = useAppDispatch()
 
     const postFavorite = () => {
-        const data = {name:asset.name, assetId: asset.id}
-
-        dispatch(createWatchList(data))
+        try {
+            const data = {name:asset.name, assetId: asset.id}
+            dispatch(createWatchList(data))
+            setOpen(true)
+            setSeverity('success')
+            setTimeout(() => {
+                setOpen(false)
+            }, 1500)
+        } catch (error) { 
+            setOpen(true)
+            setSeverity('error')
+            setTimeout(() => {
+                setOpen(false)
+            }, 1500)
+        }
         
        }
 
@@ -75,6 +88,11 @@ const SingleAssetPage: FC = (): JSX.Element =>   {
                         <Avatar onClick={postFavorite} className={classes.button}><FavoriteIcon /></Avatar>
                         <Avatar className={classes.button} sx={{transform: 'rotate(180deg)'}} onClick={() => navigate(+1)}><ArrowBackIcon /></Avatar>
                     </Grid> 
+                    <Snackbar open={open} autoHideDuration={6000}>
+                        <Alert severity={severity} sx={{ width: '100%' }}>
+                            This is a success message!
+                        </Alert>
+                    </Snackbar>
                 </Grid>
             )}
             

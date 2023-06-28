@@ -31,7 +31,7 @@ const TopBarComponent: React.FC<ITopBarProps> = ({isOpen, setIsOpen, isNonMobile
                 <IconButton className={classes.menuIcon} onClick={() => setIsOpen(!isOpen)}>
                     <MenuIcon /> 
                 </IconButton>
-                Welcome, {sessionStorage.getItem('firstName')}
+                Добро пожаловать, {sessionStorage.getItem('firstName')}
             </Grid>
                 {isNonMobile && (<Box display='flex' alignItems='center'>
                     <ThemeSwitch />
