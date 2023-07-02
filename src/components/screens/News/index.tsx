@@ -11,7 +11,7 @@ const NewsPage = () => {
     useEffect(( ) => {
         dispatch(getNews())
     }, [])
-    console.log(newsAssets)
+
     const renderNews = newsAssets.map((el:any) => (
         <Grid container spacing={2} className={classes.newsCard} key={el.id}>
             <Grid item className={classes.newsImg} xs={12} md={1} >

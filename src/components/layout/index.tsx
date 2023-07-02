@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { ILayout } from '../../common/types/layout/index'
 import TopBarComponent from '../common components/top-bar';
 import { useMediaQuery } from '@mui/material'
 import {Box} from '@mui/material'

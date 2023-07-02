@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 
-import { useMediaQuery } from '@mui/material'
+import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, useTheme, IconButton } from '@mui/material'
 
-import { Box, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, useTheme, IconButton } from '@mui/material'
-
-import {Home, ChevronLeft, ChevronRight, Timeline, Settings, MeetingRoom, ImportContacts, Apps, FormatColorTextSharp, Menu} from '@mui/icons-material';
+import {ChevronLeft, MeetingRoom } from '@mui/icons-material';
 import Logo from '../../../assets/images/logo.svg'
 
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -70,7 +68,7 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
                         <Box width='100%'>
                             <FlexBetween>
                                 <Box className={classes.brand} >
-                                    <IconButton><img src={Logo} alt="logo image" /></IconButton><Typography variant='h1'>React</Typography>
+                                    <IconButton><img src={Logo} alt='#'/></IconButton><Typography variant='h1'>React</Typography>
                                 </Box>
                                 {!isNonMobile && (
                                     <IconButton onClick={() => setIsOpen(!isOpen)}>
@@ -91,15 +89,14 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
                     </Box>
                     <Box className={classes.bottomBox}>
                         <List>
-                            <ListItem>
-                                <ListItemButton>
                                 {!isNonMobile && (
-                                
-                                    <ThemeSwitch />
-                                
-                            )}
-                                </ListItemButton>
+                                <ListItem>
+                                    <ListItemButton>
+                                        <ThemeSwitch />
+                                    </ListItemButton>
                             </ListItem>
+                            )}
+                                
                             <ListItem >
                                 <ListItemButton className={classes.navitem}>
                                     <ListItemIcon>

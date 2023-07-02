@@ -1,10 +1,9 @@
 
 
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
-import TopBarComponent from '../../common components/top-bar';
 import { getCoinGeckoAssets, getTopPriceData } from '../../store/thrunks/assets';
 
-import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useCallback, useMemo} from 'react';
 import { Box, Grid, Icon } from '@mui/material';
 
 import { useStyles } from './style';
@@ -16,22 +15,22 @@ import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 
 
 import LineСhartComponent from '../../common components/charts/line-chart';
-import { IChartData, ISingleAsset } from '../../../common/types/assets';
+import { IChartData} from '../../../common/types/assets';
 import AssetsTableComponent from '../../common components/assetTable';
 
 export const HomePage: React.FC  = ():JSX.Element => {
     const dispatch = useAppDispatch()
-    const assets = useAppSelector(state => state.asset)
     const getFavoriteAsset: IChartData[] = useAppSelector(state => state.asset.favoriteAssets)
-    const favoriteIsLoading: boolean = useAppSelector(state => state.asset.isLoading)
     const classes = useStyles()
     const fetchDataRef = useRef(false)
     const topPriceData:any = useAppSelector(state => state.asset.topPriceData)
     
 
-    const [favoriteAssets, setFaviriteAssets] = useState([
-        'bitcoin', 'ethereum'
-    ])
+    const favoriteAssets = useMemo(() => {
+       return [
+            'bitcoin', 'ethereum'
+        ]
+    }, [])
 
     const filteredArray = getFavoriteAsset.filter((value:any, index, self) => index === self.findIndex((t:any) => t.name === value.name))
 
@@ -49,7 +48,7 @@ export const HomePage: React.FC  = ():JSX.Element => {
         fetchDataRef.current = true
         getFavoriteAssets(favoriteAssets)
         dispatch(getTopPriceData())
-    }, [favoriteAssets, getFavoriteAssets])
+    }, [favoriteAssets, getFavoriteAssets, dispatch])
 
     const renderFavoriteBlock = filteredArray.map((el:any, id) =>  {
         const elPrice = el.data[el.data.length-1][1].toFixed(2)
@@ -87,7 +86,7 @@ export const HomePage: React.FC  = ():JSX.Element => {
                     {renderFavoriteBlock}
                 </Grid>
                 <Box className={classes.lineChart} >
-                   <Grid  item lg={12} md={12} xs={12}>
+                   <Grid  item xs={12}>
                     {filteredArray.length && <LineСhartComponent data={filteredArray}  />}
                    </Grid>
                 </Box>
