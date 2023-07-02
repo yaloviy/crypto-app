@@ -29,9 +29,13 @@ export const registerUser = createAsyncThunk(
     async (data:userDataRegister, {rejectWithValue})  => {
         try {
             const user = await axiosinstance.post('/auth/register', data)
-            sessionStorage.setItem('token', user.data.token)
-            sessionStorage.setItem('firstName', user.data.user.firstName)
-            return user.data
+            if (user.data.status === 400 || user.data.status === 401 || user.data.status === 500) {
+                return 
+            }
+                sessionStorage.setItem('token', user.data.token)
+                sessionStorage.setItem('firstName', user.data.user.firstName)
+                return user.data
+
         } catch (error:any) {
             if (error.response && error.response.data.message) {
                 rejectWithValue(error.response.data.message)
@@ -66,11 +70,28 @@ export const changeUserInfo = createAsyncThunk(
     'users/update',
     async (data:any, {rejectWithValue})  => {
         try {
-            console.log('+')
             const user = await axiosinstanceAuth.patch('/users', data)
             sessionStorage.setItem('firstName', user.data.firstName)
-            console.log(user)
             return user.data
+        } catch (error:any) {
+            if (error.response && error.response.data.message) {
+                rejectWithValue(error.response.data.message)
+            }  else {
+                return rejectWithValue(error.message)
+            }
+        }
+    }
+
+)
+
+
+
+export const deleteUser = createAsyncThunk(
+    'users/delete-user',
+    async (_, {rejectWithValue})  => {
+        try {
+            return await axiosinstanceAuth.delete('/users')
+
         } catch (error:any) {
             if (error.response && error.response.data.message) {
                 rejectWithValue(error.response.data.message)

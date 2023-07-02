@@ -9,6 +9,8 @@ import { tokens } from '../../../theme';
 import SettingsPersonalInfoComponent from '../../common components/personalInfo';
 import { useAppDispatch } from '../../../utils/hook/hook';
 import { getPublicUser } from '../../store/thrunks/auth';
+import ChangePasswordComponent from '../../common components/changePassword';
+import DeleteUserComponent from '../../common components/delete-user';
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -78,11 +80,11 @@ const SettingsPage = () =>  {
         <SettingsPersonalInfoComponent />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Смена пароля
-      </TabPanel>
+        <ChangePasswordComponent />
+      </TabPanel> 
       <TabPanel value={value} index={2}>
-        Удалить аккаунт
-      </TabPanel>
+        <DeleteUserComponent />
+      </TabPanel> 
     </Box>
   );
 }

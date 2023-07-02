@@ -1,9 +1,11 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
-import { Box, Grid, TextField } from '@mui/material';
-import { userInfo } from 'os';
-import React, { useEffect, useState } from 'react';
+import { Alert, AlertColor, Box, Grid, Snackbar, TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
-import { changeUserInfo, getPublicUser } from '../../store/thrunks/auth';
+import { changePersonalInfo,} from '../../../utils/yup';
+import { changeUserInfo} from '../../store/thrunks/auth';
 import { useStyles } from './style';
 
 const SettingsPersonalInfoComponent = () => {
@@ -14,6 +16,10 @@ const SettingsPersonalInfoComponent = () => {
         username: '',
         email: ''
     })
+
+    const [open, setOpen] = useState(false)
+    const [severity, setSeverity] = useState<AlertColor | undefined>('success')
+
     
     const classes = useStyles()
     const { user } = useAppSelector(state => state.auth)
@@ -26,21 +32,75 @@ const SettingsPersonalInfoComponent = () => {
         })
     }, [user])
 
-    const handleSubmit = (e: React.SyntheticEvent) => {
-        e.preventDefault()
-        dispatch(changeUserInfo(userInfo))
+    const {
+        register, 
+        formState: {
+            errors
+        },
+        handleSubmit
+    } = useForm({
+        mode: 'onChange',
+        resolver: yupResolver(changePersonalInfo)
+    })
+
+    const handleSubmitForm = (data: any) => {
+        try {
+            dispatch(changeUserInfo(data))
+            setOpen(true)
+            setSeverity('success')
+            setTimeout(() => {
+                setOpen(false)
+            }, 3000)
+        } catch (error) { 
+            setOpen(true)
+            setSeverity('error')
+            setTimeout(() => {
+                setOpen(false)
+            }, 3000)
+        }
     }
 
-    console.log(user)
-
     return (
-        <Grid component='form' className={classes.root} container onSubmit={handleSubmit}>
+        <Grid component='form' className={classes.root} container onSubmit={handleSubmit(handleSubmitForm)}>
             <Box className={classes.wrapper}>
-                <TextField onChange={(e) => (setUserInfo({...userInfo, firstName: e.target.value}))} value={userInfo.firstName} className={classes.inputText} label='Имя' type='text' variant='outlined' />
-                <TextField onChange={(e) => (setUserInfo({...userInfo, username: e.target.value}))} value={userInfo.username} className={classes.inputText} label='Логин' type='text' variant='outlined' />
-                <TextField onChange={(e) => (setUserInfo({...userInfo, email: e.target.value}))} value={userInfo.email} className={classes.inputText} label='Почта' type='text' variant='outlined' />
+                <TextField 
+                error={!!errors.firstName}
+                helperText={errors.firstName ? `${errors.firstName.message}` : ''}
+                {...register('firstName', )}  
+                className={classes.inputText} 
+                label='Имя' 
+                type='text' 
+                variant='outlined' 
+                placeholder={userInfo.firstName}
+                />
+                <TextField 
+                    error={!!errors.username}
+                    helperText={errors.username ? `${errors.username.message}` : ''}
+                    {...register('username', )}  
+                    className={classes.inputText} 
+                    label='Логин' 
+                    type='text' 
+                    variant='outlined' 
+                    placeholder={userInfo.username}
+                />
+                <TextField 
+                    error={!!errors.email}
+                    helperText={errors.email ? `${errors.email.message}` : ''}
+                    {...register('email', )}  
+                    className={classes.inputText} 
+                    label='Почта' 
+                    type='text' 
+                    variant='outlined' 
+                    placeholder={userInfo.email}
+                    />
+                    
                 <LoadingButton className={classes.inputSubmit} type='submit'>Сохранить изменения</LoadingButton>
             </Box>
+            <Snackbar open={open}>
+                        <Alert severity={severity} sx={{ width: '100%' }}>
+                            Персональные данные изменены
+                        </Alert>
+            </Snackbar>
         </Grid>
     );
 };
