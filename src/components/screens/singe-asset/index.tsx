@@ -90,7 +90,7 @@ const SingleAssetPage: FC = (): JSX.Element =>   {
                     </Grid> 
                     <Snackbar open={open} autoHideDuration={6000}>
                         <Alert severity={severity} sx={{ width: '100%' }}>
-                            This is a success message!
+                            Успешно добавлено
                         </Alert>
                     </Snackbar>
                 </Grid>

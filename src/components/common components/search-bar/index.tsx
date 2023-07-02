@@ -1,17 +1,10 @@
 import {
-  Grid,
-  colors,
-  IconButton,
-  useTheme,
-  InputBase,
   Stack,
   Autocomplete,
   TextField,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import { useStyles } from "./style";
-import { ColorModeContext, tokens } from "../../../theme";
-import React, { FC, useContext, useEffect, useState } from "react";
+
+import React, { FC, useState } from "react";
 import { useAppSelector } from "../../../utils/hook/hook";
 import { useNavigate } from "react-router-dom";
 

@@ -1,13 +1,12 @@
-import React, { Fragment } from 'react';
-import Header from '../../../../common/Header/Header';
+import React from 'react';
+
 import { TextField, Button, Typography } from '@mui/material'
-import styles from './style.module.css'
-import { margin } from '@mui/system';
+
+
 import { IPropsLogin } from '../../../../common/types/auth/auth';
-import { jsx } from '@emotion/react';
 import { useStyles } from '../styles';
 import AppLoadingButton from '../../../common components/loading-button';
-// import { useAppSelector } from '../../../utils/hook/hook';
+
 
 interface IForm {
     email: () => string,
@@ -17,7 +16,6 @@ interface IForm {
 const Login: React.FC<IPropsLogin> = ( props: IPropsLogin ): JSX.Element => {
     const {navigate, register, errors, loading } = props
     const classes = useStyles()
-    // const user = useAppSelector(state => state.auth)
     return (
         < > 
             <Typography variant="h2" fontFamily='Poppins' component="h2" textAlign='center'>Авторизация</Typography>

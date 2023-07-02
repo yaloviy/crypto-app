@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { loginUser, registerUser } from '../../thrunks/auth'
+import { getPublicUser, loginUser, registerUser } from '../../thrunks/auth'
 
 
 
@@ -98,6 +98,12 @@ const authSlice = createSlice({
         builder.addCase(registerUser.rejected, (state, action) => {
             state.isLogin = false
             state.isLoading = false 
+        })
+        builder.addCase(getPublicUser.fulfilled, (state,action) => {
+            state.user = action.payload.user
+            state.isLogin = true
+            state.token = action.payload.token
+            state.isLoading = false
         })
     }
     
