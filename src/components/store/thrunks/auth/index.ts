@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {userDataLogin, userDataRegister} from '../../../../common/types/auth/auth'
+import { useAppDispatch } from "../../../../utils/hook/hook";
 import { axiosinstance, axiosinstanceAuth } from "../../../../utils/router/axios";
+
+
 
 
 export const loginUser = createAsyncThunk(
@@ -9,7 +12,6 @@ export const loginUser = createAsyncThunk(
         try {
             const user = await axiosinstance.post('/auth/login', data)
             sessionStorage.setItem('token', user.data.token)
-            sessionStorage.setItem('firstName', user.data.user.firstName)
             return user.data
         } catch (error:any) {
             if (error.response && error.response.data.message) {
@@ -33,7 +35,6 @@ export const registerUser = createAsyncThunk(
                 return 
             }
                 sessionStorage.setItem('token', user.data.token)
-                sessionStorage.setItem('firstName', user.data.user.firstName)
                 return user.data
 
         } catch (error:any) {
@@ -53,7 +54,7 @@ export const getPublicUser = createAsyncThunk(
     async (_, {rejectWithValue})  => {
         try {
             const user = await axiosinstanceAuth.get('auth/get-public-user-info')
-            return user.data
+            return await user.data
         } catch (error:any) {
             if (error.response && error.response.data.message) {
                 rejectWithValue(error.response.data.message)
@@ -71,15 +72,15 @@ export const changeUserInfo = createAsyncThunk(
     async (data:any, {rejectWithValue})  => {
         try {
             const user = await axiosinstanceAuth.patch('/users', data)
-            sessionStorage.setItem('firstName', user.data.firstName)
-            return user.data
+            
+            return await user.data
         } catch (error:any) {
             if (error.response && error.response.data.message) {
                 rejectWithValue(error.response.data.message)
             }  else {
                 return rejectWithValue(error.message)
             }
-        }
+        } 
     }
 
 )

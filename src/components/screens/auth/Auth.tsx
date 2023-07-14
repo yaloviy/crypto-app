@@ -32,16 +32,11 @@ import { rejectLogin } from '../../store/slice/auth';
 const AuthPage = () => {
     const classes = useStyles()
     const location = useLocation()
-    const [firstName, setFirstName] = useState('')
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
+
     const [password, setPassword] = useState('')
-    const [wrongFirstName, setWrongFirstName] = useState('')
-    const [wrongUsername, setWrongUsername] = useState('')
-    const [wrongEmail, setWrongEmail] = useState('')
-    const [wrongPassword, setWrongPassword] = useState('')
+
     const [repeatPassword, setRepeatPassword] = useState('')
-    const [validationRepeatPassword, setValidationRepeatPassword] = useState('')
+
     
     const dispatch = useAppDispatch()
     const useSelector = useAppSelector
@@ -102,7 +97,7 @@ const AuthPage = () => {
                     margin='auto'
                     padding={5}
                     borderRadius={5}
-                    boxShadow={'5px 5px 10px #ccc'}
+                    boxShadow={'1px 1px 10px #fff'}
                     width='100%'
                 >
                     {location.pathname === '/login' ? <Login  

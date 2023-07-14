@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
 import { changePersonalInfo,} from '../../../utils/yup';
-import { changeUserInfo} from '../../store/thrunks/auth';
+import { changeUserInfo, getPublicUser} from '../../store/thrunks/auth';
 import { useStyles } from './style';
 
 const SettingsPersonalInfoComponent = () => {
@@ -43,9 +43,10 @@ const SettingsPersonalInfoComponent = () => {
         resolver: yupResolver(changePersonalInfo)
     })
 
-    const handleSubmitForm = (data: any) => {
+    const handleSubmitForm = async (data: any) => {
         try {
-            dispatch(changeUserInfo(data))
+            await dispatch(changeUserInfo(data))
+            dispatch(getPublicUser())
             setOpen(true)
             setSeverity('success')
             setTimeout(() => {

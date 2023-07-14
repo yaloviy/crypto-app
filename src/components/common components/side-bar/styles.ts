@@ -1,6 +1,7 @@
 import {makeStyles} from '@mui/styles'
 import { Theme } from '@mui/material'
 import { tokens } from '../../../theme'
+import { Height } from '@mui/icons-material'
 
 
 
@@ -65,6 +66,14 @@ export const useStyles = makeStyles((theme:Theme) => {
             },
             bottomBox: {
                 marginTop: '10px'
+            },
+            prompt: {
+                position: 'absolute',
+                maxWidth: '50%',
+                width: '100%',
+                maxHeight: '50%',
+                height: '100%',
+                border: '1px solid black'
             }
         }
     )

@@ -23,6 +23,7 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
     const navigate = useNavigate()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+
     useEffect(() => {
         setActive(pathname)
     }, [pathname])
@@ -36,6 +37,12 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
                 </ListItemText>
                 </ListItemButton>
             </ListItem>))
+    
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('token')
+        navigate('/login')
+    }
 
     return (<Box className={classes.root}>
 
@@ -102,7 +109,7 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
                                     <ListItemIcon>
                                         <MeetingRoom />
                                     </ListItemIcon>
-                                    <ListItemText>
+                                    <ListItemText onClick={handleLogout}>
                                         <Typography>
                                             Выйти
                                         </Typography>

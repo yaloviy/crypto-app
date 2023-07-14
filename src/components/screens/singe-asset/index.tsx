@@ -1,15 +1,15 @@
 import { Alert, AlertColor, Avatar, Box, Grid, Snackbar, Typography } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../utils/hook/hook';
 import { useStyles } from './style';
 
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { createWatchList} from '../../store/thrunks/assets';
+import { createWatchList, getWatchList} from '../../store/thrunks/assets';
+import { SouthAmerica } from '@mui/icons-material';
 
 
 
@@ -18,7 +18,7 @@ import { createWatchList} from '../../store/thrunks/assets';
 const SingleAssetPage: FC = (): JSX.Element =>   {
     const { id } = useParams()
     const topPriceData:any = useAppSelector(state => state.asset.topPriceData)
-
+    const watchlistAssets = useAppSelector(state => state.watchlist.assets)
     const [open, setOpen] = useState(false)
     const [severity, setSeverity] = useState<AlertColor | undefined>('success')
     
@@ -30,10 +30,31 @@ const SingleAssetPage: FC = (): JSX.Element =>   {
 
     const dispatch = useAppDispatch()
 
-    const postFavorite = () => {
+    useEffect(() => {
+        dispatch(getWatchList())
+    }, [])
+
+    // const matches = watchlistAssets.filter( (el:any) => topPriceData.indexOf( el ) > -1 )
+
+    // console.log(matches)
+
+
+    // const matches = useMemo(() => {
+    //     watchlistAssets.some((el:any) => {
+    //         return topPriceData.filter((element:any) =>  el.name === element.name)
+    //     })
+    // }, [topPriceData, watchlistAssets])
+
+    const matches = watchlistAssets.some((el:any) => {
+        return el?.name === asset?.name
+    })
+
+
+    const postFavorite = async () => {
         try {
             const data = {name:asset.name, assetId: asset.id}
-            dispatch(createWatchList(data))
+            await dispatch(createWatchList(data))
+            await dispatch(getWatchList())
             setOpen(true)
             setSeverity('success')
             setTimeout(() => {
@@ -45,10 +66,12 @@ const SingleAssetPage: FC = (): JSX.Element =>   {
             setTimeout(() => {
                 setOpen(false)
             }, 1500)
+        } finally {
         }
         
        }
 
+       console.log(watchlistAssets)
 
 
     return (
@@ -85,7 +108,7 @@ const SingleAssetPage: FC = (): JSX.Element =>   {
                     </Grid>
                     <Grid item xs={12} className={classes.buttons} >
                         <Avatar className={classes.button} onClick={() => navigate(-1)}><ArrowBackIcon /></Avatar>
-                        <Avatar onClick={postFavorite} className={classes.button}><FavoriteIcon /></Avatar>
+                        {matches ? '' : <Avatar onClick={postFavorite} className={classes.button}><FavoriteIcon /></Avatar>}
                         <Avatar className={classes.button} sx={{transform: 'rotate(180deg)'}} onClick={() => navigate(+1)}><ArrowBackIcon /></Avatar>
                     </Grid> 
                     <Snackbar open={open} autoHideDuration={6000}>

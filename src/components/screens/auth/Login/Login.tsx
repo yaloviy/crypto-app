@@ -44,8 +44,8 @@ const Login: React.FC<IPropsLogin> = ( props: IPropsLogin ): JSX.Element => {
             {...register('password', )} 
              />
             
-            {/* <Button type='submit' sx={{ fontFamily: 'Poppins', margin: 'auto', width: '40%', marginTop: 2, marginBottom: 2 }} size='medium' variant="contained">Войти!</Button> */}
-            <AppLoadingButton loading={loading} type='submit' sx={{ fontFamily: 'Poppins', margin: 'auto', width: '60%', marginTop: 2, marginBottom: 2 }} size='medium' variant="contained">Войти!</AppLoadingButton>
+           
+            <AppLoadingButton loading={loading} type='submit' className={classes.loginButton} size='medium' variant="contained">Войти!</AppLoadingButton>
             <Typography variant="body1" fontFamily='Poppins' component="h2" textAlign='center'>У вас нет аккаунта? <span onClick={() => navigate('/register')} className={classes.incitingText}>Зарегистрироваться</span></Typography>
         </ >
     );

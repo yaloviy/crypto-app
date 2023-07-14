@@ -18,14 +18,15 @@ const WatchListPage = () => {
         })
     })
 
-
-    console.log(filteredArray)
     
 
     useEffect(() => {
         dispatch(getTopPriceData())
         dispatch(getWatchList())
     }, [])
+
+
+
 
     return (
         <>
