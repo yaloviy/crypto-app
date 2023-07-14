@@ -14,15 +14,10 @@ const ThemeSwitch = () => {
     const classes = useStyles()
     const colorMode: any = useContext(ColorModeContext)
     return (
-        <Grid sx={{marginRight:'32px'}}>
+        <Grid>
                         <IconButton onClick={colorMode.toggleColorMode} className={classes.themeIcon} sx={{mr:'45px'}}>
                             {theme.palette.mode === 'dark' ? (<DarkModeOutlinedIcon />) : (<LightModeOutlinedIcon />)}
                         </IconButton>
-
-                        <IconButton> 
-                            <NotificationsNoneOutlinedIcon  /> 
-                        </IconButton>
-
          </Grid>
     );
 };
