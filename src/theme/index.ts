@@ -1,5 +1,8 @@
 import { createContext, useState, useMemo } from 'react'
 import { createTheme } from '@mui/material'
+import { SetMealRounded } from '@mui/icons-material'
+
+
 
 export const tokens = (mode: string) => ({
     ...(mode === 'dark'
@@ -157,12 +160,14 @@ export const ColorModeContext = createContext<{ toggleColorMode: () => void }>({
 })
 
 export const useMode = () => {
-    const [mode, setMode] = useState('dark')
+    const [mode, setMode] = useState(localStorage.getItem('theme') === null ? 'dark' : localStorage.getItem('theme')) 
+    localStorage.setItem('theme', mode as string)
 
     const colorMode = useMemo(
         () => ({
             toggleColorMode: () =>
                 setMode((prev) => (prev === 'light' ? 'dark' : 'light')),
+            // mode === 'light' ? localStorage.setItem('theme', 'dark') : localStorage.setItem('theme', 'light')
         }),
         [],
     )

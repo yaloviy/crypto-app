@@ -7,7 +7,7 @@ export const getNews = createAsyncThunk(
     async (_, {rejectWithValue})  => {
         try {
            const news = await newsInstance.get('/news/?lang=EN')
-            return news.data.Data
+            return await news.data.Data
         } catch (error:any) {
             if (error.response && error.response.data.message) {
                 return rejectWithValue(error.response.data.message)

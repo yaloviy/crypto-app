@@ -1,7 +1,11 @@
 import { makeStyles } from "@mui/styles";
+import { tokens } from "../../../theme"
+import { Theme } from "@mui/material"
 
 
-export const useStyles = makeStyles(() => {
+
+export const useStyles = makeStyles((theme: Theme) => {
+    const colors = tokens(theme.palette.mode)
     return (
         {
             root: {
@@ -11,7 +15,7 @@ export const useStyles = makeStyles(() => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 textDecoration: 'none',
-                padding: '20px'
+                // padding: '10px'
             },
             incitingText: {
                 color: 'blue',
@@ -21,6 +25,14 @@ export const useStyles = makeStyles(() => {
             spanValidation: {
                 color: 'red',
                 fontSize: '14px'
+            },
+            loginButton: {
+                fontFamily: 'Poppins !important', 
+                margin: 'auto !important',
+                width: '60% !important', 
+                marginTop: '10px !important', 
+                marginBottom: '10px !important',
+                color: `${colors.white.DEFAULT} !important`
             }
         }
     )

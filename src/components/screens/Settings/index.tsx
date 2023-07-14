@@ -49,11 +49,7 @@ const SettingsPage = () =>  {
 
   const colors = tokens(theme.palette.mode)
 
-  const dispatch = useAppDispatch()
 
-  React.useEffect(() => {
-    dispatch(getPublicUser())
-  }, [dispatch])
 
   return (
     <Box sx={{ width: '100%' }}>

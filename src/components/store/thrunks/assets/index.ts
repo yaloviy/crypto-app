@@ -7,7 +7,7 @@ export const getCoinGeckoAssets = createAsyncThunk(
         try {
            const assets = await coinGeckoApi.get(`/coins/${data}/market_chart?vs_currency=usd&days=7`)
            const singleAsset = await coinGeckoApi.get(`/coins/markets?vs_currency=usd&ids=${data}&order=market_cap_desc&per_page=100&page=1&sparkline=false`) 
-           return {
+           return await {
                 name: data, 
                 data: assets.data.prices,
                 singleAsset: {
@@ -33,7 +33,7 @@ export const getTopPriceData = createAsyncThunk(
            
            const assets = await coinGeckoApi.get(`/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`) 
             
-           return assets.data
+           return await assets.data
             
         } catch (error:any) {
             if (error.response && error.response.data.message) {
@@ -75,7 +75,7 @@ export const getWatchList = createAsyncThunk(
            
            const userAssets = await axiosinstanceAuth.get('/watchlist/get-elements')
             
-           return userAssets.data
+           return await userAssets.data
             
 
         } catch (error:any) {
@@ -95,9 +95,8 @@ export const updateUserPassword = createAsyncThunk(
     async (data: {oldPassword: string, newPassword: string}, {rejectWithValue})  => {
         try {
            
-            const password = await axiosinstanceAuth.patch('/users/change-password', data)
+           await axiosinstanceAuth.patch('/users/change-password', data)
 
-            console.log(password)
             
 
         } catch (error:any) {

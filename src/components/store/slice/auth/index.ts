@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useAppDispatch } from '../../../../utils/hook/hook'
 import { getPublicUser, loginUser, registerUser } from '../../thrunks/auth'
+
 
 
 
@@ -66,7 +68,6 @@ const authSlice = createSlice({
             
         // },
         rejectLogin(state,action) {
-            console.log(action)
             state.isLoading = false
         }
     },

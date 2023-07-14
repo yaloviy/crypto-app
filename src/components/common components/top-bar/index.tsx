@@ -6,10 +6,6 @@ import { useAppSelector } from '../../../utils/hook/hook';
 import { ColorModeContext } from '../../../theme';
 import { tokens } from '../../../theme';
 
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { useStyles } from './style';
@@ -19,11 +15,13 @@ import SearchBarComponent from '../search-bar';
 
 
 const TopBarComponent: React.FC<ITopBarProps> = ({isOpen, setIsOpen, isNonMobile}:ITopBarProps):JSX.Element => {
-    const user = useAppSelector(state => state.auth.user.firstName)
-    const theme =  useTheme()
-    const colors = tokens(theme.palette.mode)
-    const colorMode: any = useContext(ColorModeContext)
+
+
+    const user = useAppSelector(state => state.auth.user)
     const classes = useStyles()
+
+
+
     return (
         <AppBar className={classes.root} position='static'>
             <Toolbar className={classes.toolbar} >
@@ -31,7 +29,7 @@ const TopBarComponent: React.FC<ITopBarProps> = ({isOpen, setIsOpen, isNonMobile
                 <IconButton className={classes.menuIcon} onClick={() => setIsOpen(!isOpen)}>
                     <MenuIcon /> 
                 </IconButton>
-                Добро пожаловать, {sessionStorage.getItem('firstName')}
+                Добро пожаловать, {user ? `${user.firstName}` : ''}
             </Grid>
                 {isNonMobile && (<Box display='flex' alignItems='center'>
                     <ThemeSwitch />
