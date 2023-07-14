@@ -72,7 +72,7 @@ export const HomePage: React.FC  = ():JSX.Element => {
                                 </Box>
                             </Box>
                         </Box>
-                        <Grid  item lg={6} md={6} xs={12}>
+                        <Grid  item lg={6} md={6} xs={6}>
                             <AreaChartComponent data={el.data}></AreaChartComponent>
                         </Grid>
                     </Grid>

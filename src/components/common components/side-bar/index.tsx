@@ -76,12 +76,12 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
                             <FlexBetween>
                                 <Box className={classes.brand} >
                                     <IconButton><img src={Logo} alt='#'/></IconButton><Typography variant='h1'>React</Typography>
-                                </Box>
-                                {!isNonMobile && (
+                                    {!isNonMobile && (
                                     <IconButton onClick={() => setIsOpen(!isOpen)}>
                                         <ChevronLeft />
                                     </IconButton>
                                 )}
+                                </Box>
                             </FlexBetween>
                         </Box>
                         
