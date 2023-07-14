@@ -93,7 +93,7 @@ const SideBar: React.FC<ISideBarProps> = ({isNonMobile, isOpen, setIsOpen, drawe
                     <Box className={classes.bottomBox}>
                         <List>
                                 {!isNonMobile && (
-                                <ListItem sx={{marginLeft: '9px'}}>
+                                <ListItem sx={{marginLeft: '10px'}}>
                                         <ThemeSwitch />
                                 </ListItem>
                             )}
